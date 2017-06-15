@@ -1,4 +1,4 @@
-
+.idea
 # Python bytecode
 *.pyc
 
@@ -41,3 +41,8 @@ built_graph/
 
 #pytest cache
 .cache/
+
+#data
+MOTC/
+VOCdevkit/
+darkflow/cython_utils/
