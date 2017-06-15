@@ -1,8 +1,10 @@
+from os import sep
+from os.path import basename
+
+from . import motnet
+from . import vanilla
 from . import yolo
 from . import yolov2
-from . import vanilla
-from . import motnet
-from os import sep
 
 
 class framework(object):
@@ -18,6 +20,19 @@ class framework(object):
 
   def is_inp(self, file_name):
     return True
+
+    constructor = vanilla.constructor
+    loss = vanilla.train.loss
+
+    def __init__(self, meta, FLAGS):
+      model = basename(meta['model'])
+      model = '.'.join(model.split('.')[:-1])
+      meta['name'] = model
+
+      self.constructor(meta, FLAGS)
+
+    def is_inp(self, file_name):
+      return True
 
 
 class YOLO(framework):
@@ -70,7 +85,7 @@ framework factory
 types = {
   '[detection]': YOLO,
   '[region]': YOLOv2,
-  '[tracking]' : MotNet
+  '[tracking]': MotNet
 }
 
 

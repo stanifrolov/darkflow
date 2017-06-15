@@ -39,6 +39,9 @@ summary/
 #Built graphs
 built_graph/
 
+#Training checkpoints
+ckpt/*
+
 #pytest cache
 .cache/
 
