@@ -2,10 +2,9 @@ import os
 from copy import deepcopy
 
 import numpy as np
+from numpy.random import permutation as perm
 
 from darkflow.utils.motc_clean_as_list import motc_clean_as_list
-
-from numpy.random import permutation as perm
 
 
 def parse(self, exclusive=False):
@@ -18,6 +17,7 @@ def parse(self, exclusive=False):
   print('\n{} parsing {}'.format(meta['model'], ann))
   dumps = motc_clean_as_list(ann, exclusive)
   return dumps
+
 
 def _batch(self, chunk):
   """
@@ -43,7 +43,6 @@ def _batch(self, chunk):
   cellx = 1. * w / W
   celly = 1. * h / H
   for obj in allobj:
-    #TODO: Something weird is happening here; nan values and allobj != allobj_
     centerx = .5 * (obj[1] + obj[3])  # xmin, xmax
     centery = .5 * (obj[2] + obj[4])  # ymin, ymax
     cx = centerx / cellx
@@ -98,9 +97,8 @@ def _batch(self, chunk):
   return inp_feed_val, loss_feed_val
 
 
-
 def shuffle(self):
-  #TODO: How will we shuffle?
+  # TODO: How will we shuffle when we train for tracking?
   batch = self.FLAGS.batch
   data = self.parse()
   size = len(data)

@@ -8,4 +8,3 @@ command = 'flow --model cfg/motnet.cfg --train'
 command = command.split()
 
 cliHandler(command)
-
