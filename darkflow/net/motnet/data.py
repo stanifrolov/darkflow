@@ -43,6 +43,7 @@ def _batch(self, chunk):
   cellx = 1. * w / W
   celly = 1. * h / H
   for obj in allobj:
+    #TODO: Something weird is happening here; nan values and allobj != allobj_
     centerx = .5 * (obj[1] + obj[3])  # xmin, xmax
     centery = .5 * (obj[2] + obj[4])  # ymin, ymax
     cx = centerx / cellx

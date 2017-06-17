@@ -31,7 +31,7 @@ def _batch(self, chunk):
   C, labels = meta['classes'], meta['labels']
 
   # preprocess
-  jpg = chunk[0];
+  jpg = chunk[0]
   w, h, allobj_ = chunk[1]
   allobj = deepcopy(allobj_)
   path = os.path.join(self.FLAGS.dataset, jpg)
@@ -76,7 +76,7 @@ def _batch(self, chunk):
   # Finalise the placeholders' values
   upleft = np.expand_dims(prear[:, 0:2], 1)
   botright = np.expand_dims(prear[:, 2:4], 1)
-  wh = botright - upleft;
+  wh = botright - upleft
   area = wh[:, :, 0] * wh[:, :, 1]
   upleft = np.concatenate([upleft] * B, 1)
   botright = np.concatenate([botright] * B, 1)

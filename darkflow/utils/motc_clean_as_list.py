@@ -41,27 +41,29 @@ def motc_clean_as_list(ANN, exclusive=False):
     seq_info = "seqinfo.ini"
     config.read(seq_info)
     seq_info = config['Sequence']
-    w = seq_info['imWidth']
-    h = seq_info['imHeight']
+    img_width = int(seq_info['imWidth'])
+    img_height = int(seq_info['imHeight'])
 
     all_images = glob.glob('img1/*')
     curr_img_number = 1
     for image in all_images:
-      # TODO: build all from gt.txt
       all_obj_in_image = list()
       gt_file = open("gt/gt.txt")
       for line in gt_file:
         splitted_line = line.split(',')
-        frame = splitted_line[0]
-        if int(frame) == curr_img_number:
-          id = splitted_line[1]
-          bb_left = splitted_line[2]
-          bb_top = splitted_line[3]
-          bb_width = splitted_line[4]
-          bb_height = splitted_line[5]
-          all_obj_in_image.append([1, bb_left, bb_top, bb_width, bb_height])  # id 1 for just detected object
+        frame_number = int(splitted_line[0])
+        if frame_number == curr_img_number:
+          # id = splitted_line[1]
+          id = "object" # motc dataset only has ids, not classes
+          bb_left = int(splitted_line[2])
+          bb_top = int(splitted_line[3])
+          bb_width = int(splitted_line[4])
+          bb_height = int(splitted_line[5])
+          x_min, y_min, x_max, y_max = motc_gt_to_voc_gt(bb_left, bb_top, bb_width, bb_height)
+          if x_min > 0 and y_min > 0 and x_max > 0 and y_max > 0:
+            all_obj_in_image.append([id, x_min, y_min, x_max, y_max])
       gt_file.close()
-      curr_img_object = [[folder + "/" + image, [w, h, all_obj_in_image]]]
+      curr_img_object = [[folder + "/" + image, [img_width, img_height, all_obj_in_image]]]
       dumps += curr_img_object
       curr_img_number += 1
     os.chdir("..")
@@ -84,3 +86,11 @@ def motc_clean_as_list(ANN, exclusive=False):
 
   pickle.dump(dumps, open('motc_dump.p', 'wb'))
   return dumps
+
+
+def motc_gt_to_voc_gt(bb_left, bb_top, bb_width, bb_height):
+  x_min = bb_left
+  y_min = bb_top
+  x_max = bb_left + bb_width
+  y_max = bb_top + bb_height
+  return x_min, y_min, x_max, y_max
