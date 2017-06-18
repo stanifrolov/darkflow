@@ -78,5 +78,5 @@ class Layer(object):
   def setup(self, *args):
     pass
 
-  def finalize(self):
+  def finalize(self, transpose):
     pass
