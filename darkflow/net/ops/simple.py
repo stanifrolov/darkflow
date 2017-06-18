@@ -67,14 +67,16 @@ class flatten(BaseOp):
     self.out = slim.flatten(
       temp, scope=self.scope)
 
-  def speak(self): return 'flat'
+  def speak(self):
+    return 'flat'
 
 
 class softmax(BaseOp):
   def forward(self):
     self.out = tf.nn.softmax(self.inp.out)
 
-  def speak(self): return 'softmax()'
+  def speak(self):
+    return 'softmax()'
 
 
 class avgpool(BaseOp):
@@ -131,7 +133,8 @@ class leaky(BaseOp):
       name=self.scope
     )
 
-  def verbalise(self): pass
+  def verbalise(self):
+    pass
 
 
 class identity(BaseOp):

@@ -35,7 +35,7 @@ class reorg(BaseOp):
 
 class local(BaseOp):
     def forward(self):
-        pad = [[self.lay.pad, self.lay.pad]] * 2;
+        pad = [[self.lay.pad, self.lay.pad]] * 2
         temp = tf.pad(self.inp.out, [[0, 0]] + pad + [[0, 0]])
 
         k = self.lay.w['kernels']
@@ -63,9 +63,10 @@ class local(BaseOp):
         msg = 'loca {}x{}p{}_{}  {}'.format(*args)
         return msg
 
+
 class convolutional(BaseOp):
     def forward(self):
-        pad = [[self.lay.pad, self.lay.pad]] * 2;
+        pad = [[self.lay.pad, self.lay.pad]] * 2
         temp = tf.pad(self.inp.out, [[0, 0]] + pad + [[0, 0]])
         temp = tf.nn.conv2d(temp, self.lay.w['kernel'], padding = 'VALID', 
             name = self.scope, strides = [1] + [self.lay.stride] * 2 + [1])
@@ -97,6 +98,7 @@ class convolutional(BaseOp):
         msg = 'conv {}x{}p{}_{}  {}  {}'.format(*args)
         return msg
 
+
 class conv_select(convolutional):
     def speak(self):
         l = self.lay
@@ -105,6 +107,7 @@ class conv_select(convolutional):
         args += [l.activation]
         msg = 'sele {}x{}p{}_{}  {}  {}'.format(*args)
         return msg
+
 
 class conv_extract(convolutional):
     def speak(self):
