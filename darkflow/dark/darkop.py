@@ -1,8 +1,8 @@
-from .layer import Layer
 from .convolution import *
 from .connected import *
 
-#TODO: Add your needed layers here
+
+# TODO: Add your needed layers here
 
 class avgpool_layer(Layer):
   pass

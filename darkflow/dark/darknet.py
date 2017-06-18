@@ -1,9 +1,10 @@
+import os
+import time
+import warnings
+
+from darkflow.utils import loader
 from darkflow.utils.process import cfg_yielder
 from .darkop import create_darkop
-from darkflow.utils import loader
-import warnings
-import time
-import os
 
 
 class Darknet(object):
@@ -65,11 +66,12 @@ class Darknet(object):
     """
     args = [model, FLAGS.binary]
     cfg_layers = cfg_yielder(*args)
-    meta = dict();
+    meta = dict()
     layers = list()
     for i, info in enumerate(cfg_layers):
       if i == 0:
-        meta = info; continue
+        meta = info
+        continue
       else:
         new = create_darkop(*info)
       layers.append(new)
