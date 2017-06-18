@@ -2,6 +2,8 @@ from .simple import *
 from .convolution import *
 from .baseop import HEADER, LINE
 
+# TODO: Add your additional operators here
+
 op_types = {
 	'convolutional': convolutional,
 	'conv-select': conv_select,
