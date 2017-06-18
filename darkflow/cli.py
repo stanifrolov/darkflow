@@ -1,37 +1,44 @@
-from .defaults import argHandler #Import the default arguments
 import os
+
 from darkflow.net.build import TFNet
+from .defaults import argHandler  # Import the default arguments
+
 
 def cliHandler(args):
-    FLAGS = argHandler()
-    FLAGS.setDefaults()
-    FLAGS.parseArgs(args)
+  FLAGS = argHandler()
+  FLAGS.setDefaults()
+  FLAGS.parseArgs(args)
 
-    # make sure all necessary dirs exist
-    def _get_dir(dirs):
-        for d in dirs:
-            this = os.path.abspath(os.path.join(os.path.curdir, d))
-            if not os.path.exists(this): os.makedirs(this)
-    _get_dir([FLAGS.imgdir, FLAGS.binary, FLAGS.backup, 
-             os.path.join(FLAGS.imgdir,'out'), FLAGS.summary])
+  # make sure all necessary dirs exist
+  def _get_dir(dirs):
+    for d in dirs:
+      this = os.path.abspath(os.path.join(os.path.curdir, d))
+      if not os.path.exists(this): os.makedirs(this)
 
-    # fix FLAGS.load to appropriate type
-    try: FLAGS.load = int(FLAGS.load)
-    except: pass
+  _get_dir([FLAGS.imgdir, FLAGS.binary, FLAGS.backup,
+            os.path.join(FLAGS.imgdir, 'out'), FLAGS.summary])
 
-    tfnet = TFNet(FLAGS)
-    
-    if FLAGS.demo:
-        tfnet.camera()
-        exit('Demo stopped, exit.')
+  # fix FLAGS.load to appropriate type
+  try:
+    FLAGS.load = int(FLAGS.load)
+  except:
+    pass
 
-    if FLAGS.train:
-        print('Enter training ...'); tfnet.train()
-        if not FLAGS.savepb: 
-            exit('Training finished, exit.')
+  tfnet = TFNet(FLAGS)
 
-    if FLAGS.savepb:
-        print('Rebuild a constant version ...')
-        tfnet.savepb(); exit('Done')
+  if FLAGS.demo:
+    tfnet.camera()
+    exit('Demo stopped, exit.')
 
-    tfnet.predict()
+  if FLAGS.train:
+    print('Enter training ...');
+    tfnet.train()
+    if not FLAGS.savepb:
+      exit('Training finished, exit.')
+
+  if FLAGS.savepb:
+    print('Rebuild a constant version ...')
+    tfnet.savepb();
+    exit('Done')
+
+  tfnet.predict()

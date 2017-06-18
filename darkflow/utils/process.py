@@ -122,7 +122,7 @@ def cfg_yielder(model, binary):
       l = w * h * c
     # -----------------------------------------------------
     elif d['type'] == '[avgpool]':
-      flat = True;
+      flat = True
       l = c
       yield ['avgpool', i]
     # -----------------------------------------------------
@@ -300,7 +300,7 @@ def cfg_yielder(model, binary):
         routes = [int(x.strip()) for x in routes.split(',')]
       routes = [i + x if x < 0 else x for x in routes]
       for j, x in enumerate(routes):
-        lx = layers[x];
+        lx = layers[x]
         xtype = lx['type']
         _size = lx['_size'][:3]
         if j == 0:
@@ -316,8 +316,8 @@ def cfg_yielder(model, binary):
     elif d['type'] == '[reorg]':
       stride = d.get('stride', 1)
       yield ['reorg', i, stride]
-      w = w // stride;
-      h = h // stride;
+      w = w // stride
+      h = h // stride
       c = c * (stride ** 2)
       l = w * h * c
     # -----------------------------------------------------
