@@ -2,8 +2,8 @@ import os
 import time
 import warnings
 
-from darkflow.utils import loader
-from darkflow.utils.process import cfg_yielder
+from ..utils import loader
+from ..utils.process import cfg_yielder
 from .darkop import create_darkop
 
 
