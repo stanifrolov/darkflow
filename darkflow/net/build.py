@@ -4,7 +4,7 @@ import time
 
 import tensorflow as tf
 
-from darkflow.dark.darknet import Darknet
+from ..dark.darknet import Darknet
 from . import flow
 from . import help
 from .framework import create_framework

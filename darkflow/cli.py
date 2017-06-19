@@ -1,6 +1,6 @@
 import os
 
-from darkflow.net.build import TFNet
+from .net.build import TFNet
 from .defaults import argHandler  # Import the default arguments
 
 
