@@ -1,5 +1,6 @@
 from .connected import *
 from .convolution import *
+from .recurrent import *
 
 
 class avgpool_layer(Layer):
@@ -59,7 +60,8 @@ darkops = {
   'reorg': reorg_layer,
   'conv-select': conv_select_layer,
   'conv-extract': conv_extract_layer,
-  'extract': extract_layer
+  'extract': extract_layer,
+  'recurrent': recurrent_layer
 }
 
 
