@@ -1,6 +1,6 @@
 import numpy as np
 
-from ..utils import loader
+from ..utils.loader import *
 
 
 class Layer(object):
