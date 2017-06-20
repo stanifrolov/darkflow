@@ -1,7 +1,6 @@
+from ..utils import loader
+
 import numpy as np
-
-from ..utils.loader import *
-
 
 class Layer(object):
   def __init__(self, *args):

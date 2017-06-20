@@ -98,7 +98,7 @@ def _batch(self, chunk):
 
 
 def shuffle(self):
-  # TODO: How will we shuffle when we train for tracking? We probably want to take sequences of 5 or 6 subsequent images
+  # TODO: implement shuffling for sequences
   batch = self.FLAGS.batch
   data = self.parse()
   size = len(data)

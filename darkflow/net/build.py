@@ -5,6 +5,7 @@ import time
 import tensorflow as tf
 
 from ..dark.darknet import Darknet
+from ..defaults import argHandler
 from . import flow
 from . import help
 from .framework import create_framework
@@ -38,7 +39,6 @@ class TFNet(object):
     self.ntrain = 0
 
     if isinstance(FLAGS, dict):
-      from ..defaults import argHandler
       newFLAGS = argHandler()
       newFLAGS.setDefaults()
       newFLAGS.update(FLAGS)

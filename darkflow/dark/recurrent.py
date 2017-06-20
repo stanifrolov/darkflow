@@ -1,6 +1,6 @@
 from .layer import Layer
 
-#TODO impelement recurrent layer
+#TODO: impelement recurrent layer
 
 class recurrent_layer:
 

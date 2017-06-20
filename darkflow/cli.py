@@ -31,14 +31,14 @@ def cliHandler(args):
     exit('Demo stopped, exit.')
 
   if FLAGS.train:
-    print('Enter training ...');
+    print('Enter training ...')
     tfnet.train()
     if not FLAGS.savepb:
       exit('Training finished, exit.')
 
   if FLAGS.savepb:
     print('Rebuild a constant version ...')
-    tfnet.savepb();
+    tfnet.savepb()
     exit('Done')
 
   tfnet.predict()
