@@ -1,4 +1,4 @@
-from .darkflow.cli import cliHandler
+from darkflow.cli import cliHandler
 
 
 #command = 'flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/JPEGImages --model cfg/yolo.cfg --load bin/yolo.weights'
