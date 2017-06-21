@@ -1,4 +1,4 @@
-from darkflow.cli import cliHandler
+from .darkflow.cli import cliHandler
 
 
 #command = 'flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/JPEGImages --model cfg/yolo.cfg --load bin/yolo.weights'
@@ -6,7 +6,7 @@ from darkflow.cli import cliHandler
 
 
 command = './flow --model cfg/tiny-yolo-voc.cfg --train --gpu 1.0 --dataset ./VOCdevkit/VOC2007/JPEGImages --annotation ./VOCdevkit/VOC2007/Annotations'
-#command = 'flow --model cfg/motnet.cfg --load bin/yolo.weights --train --trainer adam'
+#command = './flow --model cfg/motnet.cfg --load bin/yolo.weights --train --trainer adam'
 
 command = command.split()
 
