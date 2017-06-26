@@ -1,13 +1,15 @@
-import tensorflow as tf
-import time
-from . import help
-from . import flow
-from .ops import op_create, identity
-from .ops import HEADER, LINE
-from .framework import create_framework
-from darkflow.dark.darknet import Darknet
 import json
 import os
+import time
+
+import tensorflow as tf
+
+from darkflow.dark.darknet import Darknet
+from . import flow
+from . import help
+from .framework import create_framework
+from .ops import HEADER, LINE
+from .ops import op_create, identity
 
 
 class TFNet(object):
