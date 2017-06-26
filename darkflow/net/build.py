@@ -74,6 +74,7 @@ class TFNet(object):
     with tf.device(device_name):
       with self.graph.as_default() as g:
         self.build_forward()
+        print(device_name)
         self.setup_meta_ops()
     self.say('Finished in {}s\n'.format(
       time.time() - start))
@@ -218,6 +219,7 @@ def __init__(self, FLAGS, darknet=None):
     device_name = FLAGS.gpuName \
       if FLAGS.gpu > 0.0 else None
     with tf.device(device_name):
+      print(device_name)
       with self.graph.as_default() as g:
         self.build_from_pb()
     return
@@ -312,6 +314,7 @@ def setup_meta_ops(self):
   if self.FLAGS.summary is not None:
     self.summary_op = tf.summary.merge_all()
     self.writer = tf.summary.FileWriter(self.FLAGS.summary + 'train')
+
 
   self.sess = tf.Session(config=tf.ConfigProto(**cfg))
   self.sess.run(tf.global_variables_initializer())
