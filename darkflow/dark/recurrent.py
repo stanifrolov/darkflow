@@ -1,11 +1,19 @@
 from .layer import Layer
 
-#TODO: impelement recurrent layer
+#TODO: implement recurrent layer
 
-class recurrent_layer:
+class recurrent_layer(Layer):
+  def setup(self, num_units):
+    self.num_units = num_units
 
-  def setup(self):
-    pass
+  @property
+  def signature(self):
+    sig = ['recurrent']
+    sig += self._signature[1:-2]
+    return sig
 
-  def finalize(self):
-    pass
+  def finalize(self, _):
+    """deal with darknet"""
+    kernel = self.w['kernel']
+    if kernel is None: return
+    self.w['kernel'] = True
