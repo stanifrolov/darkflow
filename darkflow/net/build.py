@@ -135,6 +135,7 @@ class TFNet(object):
       cfg['gpu_options'] = tf.GPUOptions(
         per_process_gpu_memory_fraction=utility)
       cfg['allow_soft_placement'] = True
+      cfg['allow_growth'] = True
     else:
       self.say('Running entirely on CPU')
       cfg['device_count'] = {'GPU': 0}
