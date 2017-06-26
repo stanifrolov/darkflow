@@ -6,7 +6,7 @@ from darkflow.cli import cliHandler
 
 
 #command = './flow --model cfg/tiny-yolo-voc.cfg --train --gpu 1.0 --dataset ./VOCdevkit/VOC2007/JPEGImages --annotation ./VOCdevkit/VOC2007/Annotations'
-command = './flow --model cfg/motnet.cfg --load bin/yolo.weights --train --trainer adam'
+command = './flow --model cfg/motnet.cfg --train --trainer adam'
 
 command = command.split()
 
