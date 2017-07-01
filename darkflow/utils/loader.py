@@ -14,7 +14,8 @@ class loader(object):
   """
   VAR_LAYER = ['convolutional', 'connected', 'local',
                'select', 'conv-select',
-               'extract', 'conv-extract']
+               'extract', 'conv-extract',
+               'recurrent']
 
   def __init__(self, *args):
     self.src_key = list()
@@ -50,7 +51,8 @@ class weights_loader(loader):
       'biases', 'gamma', 'moving_mean', 'moving_variance', 'kernel'
     ],
     'connected': ['biases', 'weights'],
-    'local': ['biases', 'kernels']
+    'local': ['biases', 'kernels'],
+    'recurrent' : ['biases', 'weights']
   })
 
   def load(self, path, src_layers):

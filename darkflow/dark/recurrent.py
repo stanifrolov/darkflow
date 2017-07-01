@@ -3,8 +3,8 @@ from .layer import Layer
 #TODO: implement recurrent layer
 
 class recurrent_layer(Layer):
-  def setup(self, num_units):
-    self.num_units = num_units
+  def setup(self):
+    self.num_units = 4102
 
   @property
   def signature(self):

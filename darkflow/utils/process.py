@@ -111,6 +111,10 @@ def cfg_yielder(model, binary):
       w, h, c = w_, h_, n
       l = w * h * c
     # -----------------------------------------------------
+    elif d['type'] == '[recurrent]':
+      # TODO: what parameters to pass from the cfg
+      yield ['recurrent', i]
+    # -----------------------------------------------------
     elif d['type'] == '[maxpool]':
       stride = d.get('stride', 1)
       size = d.get('size', stride)
