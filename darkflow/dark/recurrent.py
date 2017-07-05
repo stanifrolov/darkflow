@@ -4,7 +4,7 @@ from .layer import Layer
 
 class recurrent_layer(Layer):
   def setup(self):
-    self.num_units = 4102
+    pass
 
   @property
   def signature(self):

@@ -78,6 +78,7 @@ def motc_clean_as_list(ANN, exclusive=False):
 
   os.chdir(start_directory)
 
+  dumplist.sort()
   pickle.dump(dumplist, open('motc_dump.p', 'wb'))
   return dumplist
 

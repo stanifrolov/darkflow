@@ -33,7 +33,7 @@ def labels(meta, FLAGS):
     elif model == 'yolo9000':
       print("Model has name yolo9000, loading yolo9000 labels.")
       file = os.path.join(FLAGS.config, nine_names)
-    elif model == 'motnet':
+    elif model == 'tiny_motnet' or model == "full_motnet":
       print("Model has name motnet, loading motnet labels from labels.txt.")
     with open(file, 'r') as f:
       meta['labels'] = list()

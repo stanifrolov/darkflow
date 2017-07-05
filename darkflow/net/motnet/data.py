@@ -115,21 +115,41 @@ def shuffle(self):
       feed_batch = dict()
 
       for j in range(b * batch, b * batch + batch):
-        train_instance = data[shuffle_idx[j]]
-        inp, new_feed = self._batch(train_instance)
+        # TODO: get sequence length from parameter
+        start_train_instance = data[shuffle_idx[j]]
+        for seq in range(3):
+          train_instance = getNextInSequence(start_train_instance, seq, data)
+          inp, new_feed = self._batch(train_instance)
 
-        if inp is None: continue
-        x_batch += [np.expand_dims(inp, 0)]
+          if inp is None: continue
+          x_batch += [np.expand_dims(inp, 0)]
 
-        for key in new_feed:
-          new = new_feed[key]
-          old_feed = feed_batch.get(key,
-                                    np.zeros((0,) + new.shape))
-          feed_batch[key] = np.concatenate([
-            old_feed, [new]
-          ])
+          for key in new_feed:
+            new = new_feed[key]
+            old_feed = feed_batch.get(key,
+                                      np.zeros((0,) + new.shape))
+            feed_batch[key] = np.concatenate([
+              old_feed, [new]
+            ])
 
       x_batch = np.concatenate(x_batch, 0)
       yield x_batch, feed_batch
 
     print('Finish {} epoch(es)'.format(i + 1))
+
+
+def getNextInSequence(start_train_instance, seq, data):
+  # TODO: when is data augmentation happening? per image or per batch? check out train.py in tf-scripts
+  index = data.index(start_train_instance)
+  path_start = data[index][0]
+  img = path_start.split("/")[2]
+  number = int(img.split(".")[0])
+  next_number = number + seq
+  next_number = format(next_number, '06d')
+  new_path = path_start.split("/")[0] + "/" + path_start.split("/")[1] + "/" + next_number + ".jpg"
+  calculated_path = data[index + seq][0]
+
+  if calculated_path == new_path:
+    return data[index + seq]
+  else:
+    return getNextInSequence(start_train_instance, seq - 1, data)
