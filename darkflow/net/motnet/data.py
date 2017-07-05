@@ -147,6 +147,8 @@ def getNextInSequence(start_train_instance, seq, data):
   next_number = number + seq
   next_number = format(next_number, '06d')
   new_path = path_start.split("/")[0] + "/" + path_start.split("/")[1] + "/" + next_number + ".jpg"
+  calculated_path = ""
+
   try:
     calculated_path = data[index + seq][0]
   except IndexError:
