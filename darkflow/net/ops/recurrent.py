@@ -13,15 +13,15 @@ class recurrent(BaseOp):
     _X = tf.reshape(_X, [input_shape, 19*19*30]) # TODO: get shape from last layer
     _X = tf.split(_X, 1, 0)
 
-    cell = tf.contrib.rnn.LSTMCell(19*19*30, state_is_tuple=False)
-    state = tf.zeros([input_shape, 2 * 19*19*30])
+    cell = tf.contrib.rnn.LSTMCell(13*13*30, state_is_tuple=False)
+    state = tf.zeros([input_shape, 2 * 13*13*30])
 
     with tf.variable_scope(tf.get_variable_scope()) as _:
       for step in range(3):
         outputs, state = cell(_X[0], state)
         tf.get_variable_scope().reuse_variables()
 
-    self.out = tf.reshape(outputs, [input_shape, 19, 19, 30])
+    self.out = tf.reshape(outputs, [input_shape, 13, 13, 30])
 
   def speak(self):
     #l = self.lay
