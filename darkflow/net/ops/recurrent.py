@@ -10,7 +10,7 @@ class recurrent(BaseOp):
   def forward(self):
     _X = self.inp.out
     input_shape = tf.shape(_X)[0]
-    _X = tf.reshape(_X, [input_shape, 19*19*30]) # TODO: get shape from last layer
+    _X = tf.reshape(_X, [input_shape, 13*13*30]) # TODO: get shape from last layer
     _X = tf.split(_X, 1, 0)
 
     cell = tf.contrib.rnn.LSTMCell(13*13*30, state_is_tuple=False)
