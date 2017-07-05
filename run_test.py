@@ -15,7 +15,7 @@ Working configs
 """
 Training
 """
-command = './flow --model cfg/full_motnet.cfg --train --gpu 0.9'
+command = './flow --model cfg/full_motnet.cfg --load bin/yolo.weights --train --gpu 0.9'
 
 """
 Run the command
