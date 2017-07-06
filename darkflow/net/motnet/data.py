@@ -115,8 +115,8 @@ def shuffle(self):
       feed_batch = dict()
 
       for j in range(b * batch, b * batch + batch):
-        # TODO: get sequence length from parameter
-        start_train_instance = data[shuffle_idx[j]]
+        # TODO: get sequence length from parameter -> no access
+        start_train_instance = data[shuffle_idx[j]] # TODO: data[idx[j]] != data[index]
         for seq in range(3):
           train_instance = getNextInSequence(start_train_instance, seq, data)
           inp, new_feed = self._batch(train_instance)

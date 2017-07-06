@@ -3,8 +3,8 @@ from .layer import Layer
 #TODO: implement recurrent layer
 
 class recurrent_layer(Layer):
-  def setup(self):
-    pass
+  def setup(self, seq_length):
+    self.seq_length = seq_length
 
   @property
   def signature(self):
@@ -15,5 +15,6 @@ class recurrent_layer(Layer):
   def finalize(self, _):
     """deal with darknet"""
     kernel = self.w['kernel']
-    if kernel is None: return
+    if kernel is None:
+      return
     self.w['kernel'] = True

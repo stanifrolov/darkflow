@@ -113,7 +113,8 @@ def cfg_yielder(model, binary):
     # -----------------------------------------------------
     elif d['type'] == '[recurrent]':
       # TODO: what parameters to pass from the cfg
-      yield ['recurrent', i]
+      seq_length = d.get('seq_length')
+      yield ['recurrent', i, seq_length]
     # -----------------------------------------------------
     elif d['type'] == '[maxpool]':
       stride = d.get('stride', 1)
