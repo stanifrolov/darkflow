@@ -8,7 +8,7 @@ class recurrent(BaseOp):
     _X = self.inp.out
     input_shape = tf.shape(_X)[0]
     num_units = _X.shape.dims[1].value * _X.shape.dims[2].value * _X.shape.dims[3].value
-    _X_list = tf.reshape(_X, [input_shape, num_units])  # TODO: get shape dynamically from last layer
+    _X_list = tf.reshape(_X, [input_shape, num_units]) # TODO: get shape dynamically from last layer
     _X_list = tf.split(_X_list, 1, 0)
 
     cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=False)
@@ -16,7 +16,7 @@ class recurrent(BaseOp):
 
     with tf.variable_scope(tf.get_variable_scope()) as _:
       for step in range(3):
-        outputs, state = cell(_X_list[0], state)
+        outputs, state = cell(_X_list[step], state)
         tf.get_variable_scope().reuse_variables()
 
     self.out = tf.reshape(outputs, [input_shape, _X.shape.dims[1].value, _X.shape.dims[2].value, _X.shape.dims[3].value])
