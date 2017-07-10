@@ -49,7 +49,7 @@ def _batch(self, chunk):
     cy = centery / celly
 
     # if cx >= W or cy >= H: return None, None
-    if cx >= W: # TODO: what case happens here?
+    if cx >= W: # TODO: implement clipping outer object to img border
       cx = W - 0.01
     if cy >= H:
       cy = H - 0.01
@@ -104,7 +104,6 @@ def _batch(self, chunk):
 
 
 def shuffle(self):
-  # TODO: implement shuffling for sequences
   batch_size = self.FLAGS.batch
   data = self.parse()
   size = len(data)
@@ -112,7 +111,7 @@ def shuffle(self):
   print('Dataset of {} instance(s)'.format(size))
   if batch_size > size: self.FLAGS.batch = batch_size = size
   batch_per_epoch = int(size / batch_size)
-  seq_length = 5 # TODO: get sequence length from parameter -> no access
+  seq_length = 10 # TODO: get sequence length from flags
 
   for epoch in range(self.FLAGS.epoch):
     shuffle_idx = perm(np.arange(size))
@@ -122,8 +121,8 @@ def shuffle(self):
       feed_batch = dict()
 
       for j in range(batch * batch_size, batch * batch_size + batch_size):
-        # TODO: check if enough subsequent images for sequence
         start_train_instance = data[shuffle_idx[j]]
+        # TODO: check if enough subsequent images for sequence
         for seq in range(seq_length):
           train_instance = getNextInSequence(start_train_instance, seq, data)
           inp, new_feed = self._batch(train_instance)
@@ -147,7 +146,6 @@ def shuffle(self):
 
 
 def getNextInSequence(start_train_instance, seq, data):
-  # TODO: when is data augmentation happening? per image or per batch? check out train.py in tf-scripts
   index = data.index(start_train_instance)
   path_start = data[index][0]
   img = path_start.split("/")[2]
@@ -155,7 +153,6 @@ def getNextInSequence(start_train_instance, seq, data):
   next_number = number + seq
   next_number = format(next_number, '06d')
   new_path = path_start.split("/")[0] + "/" + path_start.split("/")[1] + "/" + next_number + ".jpg"
-  calculated_path = ""
 
   try:
     calculated_path = data[index + seq][0]

@@ -48,7 +48,7 @@ def motc_clean_as_list(ANN, exclusive=False):
       splitted_line = line.split(',')
       x_min, y_min, x_max, y_max = motc_gt_to_voc_gt(splitted_line)
       frame_number = int(splitted_line[0])
-      if x_min > 0 and y_min > 0 and x_max > 0 and y_max > 0:
+      if x_min > 0 and y_min > 0 and x_max > 0 and y_max > 0: # TODO: clip outer objects to img border
         key = str(folder + "/img1/" + '{:06d}'.format(frame_number) + ".jpg")
         if key not in dumps:
           dumps[key] = [img_width, img_height, [["object", x_min, y_min, x_max, y_max]]]

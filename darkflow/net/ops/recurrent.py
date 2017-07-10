@@ -5,7 +5,7 @@ from .baseop import BaseOp
 
 class recurrent(BaseOp):
   def forward(self):
-    batch_size = 2 # TODO: hardcoded
+    batch_size = 2 # TODO: get batch size from flags
     _X = self.inp.out
     input_shape = tf.shape(_X)[0]
     num_units = _X.shape.dims[1].value * _X.shape.dims[2].value * _X.shape.dims[3].value
@@ -16,14 +16,12 @@ class recurrent(BaseOp):
     with tf.variable_scope(self.scope) as scope:
       cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
       state = (tf.zeros([batch_size, num_units]),) * 2
-      #out = tf.zeros([0, num_units], dtype=tf.float32)
       out = []
 
       for step in range(self.lay.seq_length):
         if step > 0:
           scope.reuse_variables()
         outputs, state = cell(_X_list[step], state)
-        #tf.concat([out, outputs], 0)
         out.append(outputs)
 
     out = tf.stack(out, 0)

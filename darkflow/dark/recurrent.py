@@ -1,7 +1,5 @@
 from .layer import Layer
 
-#TODO: implement recurrent layer
-
 class recurrent_layer(Layer):
   def setup(self, seq_length):
     self.seq_length = seq_length

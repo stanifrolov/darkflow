@@ -112,7 +112,6 @@ def cfg_yielder(model, binary):
       l = w * h * c
     # -----------------------------------------------------
     elif d['type'] == '[recurrent]':
-      # TODO: what parameters to pass from the cfg
       seq_length = d.get('seq_length')
       yield ['recurrent', i, seq_length]
     # -----------------------------------------------------

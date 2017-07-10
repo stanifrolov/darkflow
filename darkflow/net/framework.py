@@ -65,7 +65,6 @@ class YOLOv2(framework):
 
 
 class MotNet(framework):
-  # TODO: preprocessing takes most of the time
   constructor = yolo.constructor
   parse = motnet.data.parse
   shuffle = motnet.data.shuffle
