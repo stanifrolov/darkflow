@@ -49,7 +49,7 @@ def _batch(self, chunk):
     cy = centery / celly
 
     # if cx >= W or cy >= H: return None, None
-    if cx >= W: #TODO: what case happens here?
+    if cx >= W: # TODO: what case happens here?
       cx = W - 0.01
     if cy >= H:
       cy = H - 0.01
@@ -122,6 +122,7 @@ def shuffle(self):
       feed_batch = dict()
 
       for j in range(batch * batch_size, batch * batch_size + batch_size):
+        # TODO: check if enough subsequent images for sequence
         start_train_instance = data[shuffle_idx[j]]
         for seq in range(seq_length):
           train_instance = getNextInSequence(start_train_instance, seq, data)
