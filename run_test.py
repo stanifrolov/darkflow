@@ -3,6 +3,7 @@ from darkflow.cli import cliHandler
 """
 Test data
 """
+#command = './flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1 --model cfg/tiny_motnet.cfg --load bin/tiny-yolo-voc.weights --batch 6 --gpu 0.9'
 #command = 'flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1 --model cfg/full_motnet.cfg --load 1000'
 #command = 'flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/JPEGImages --model cfg/tiny-yolo-voc.cfg --load bin/tiny-yolo-voc.weights'
 
@@ -15,7 +16,7 @@ Working configs
 """
 Training
 """
-command = './flow --model cfg/tiny_motnet.cfg --load bin/tiny-yolo-voc.weights --train --gpu 0.9'
+command = './flow --model cfg/full_motnet.cfg --load bin/yolo.weights --train --gpu 0.9'
 
 """
 Run the command

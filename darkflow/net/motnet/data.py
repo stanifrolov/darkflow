@@ -47,7 +47,13 @@ def _batch(self, chunk):
     centery = .5 * (obj[2] + obj[4])  # ymin, ymax
     cx = centerx / cellx
     cy = centery / celly
-    if cx >= W or cy >= H: return None, None
+
+    # if cx >= W or cy >= H: return None, None
+    if cx >= W: #TODO: what case happens here?
+      cx = W
+    if cy >= H:
+      cy = H
+
     obj[3] = float(obj[3] - obj[1]) / w
     obj[4] = float(obj[4] - obj[2]) / h
     obj[3] = np.sqrt(obj[3])
@@ -78,7 +84,7 @@ def _batch(self, chunk):
   # Finalise the placeholders' values
   upleft = np.expand_dims(prear[:, 0:2], 1)
   botright = np.expand_dims(prear[:, 2:4], 1)
-  wh = botright - upleft;
+  wh = botright - upleft
   area = wh[:, :, 0] * wh[:, :, 1]
   upleft = np.concatenate([upleft] * B, 1)
   botright = np.concatenate([botright] * B, 1)
@@ -99,29 +105,30 @@ def _batch(self, chunk):
 
 def shuffle(self):
   # TODO: implement shuffling for sequences
-  batch = self.FLAGS.batch
+  batch_size = self.FLAGS.batch
   data = self.parse()
   size = len(data)
 
   print('Dataset of {} instance(s)'.format(size))
-  if batch > size: self.FLAGS.batch = batch = size
-  batch_per_epoch = int(size / batch)
+  if batch_size > size: self.FLAGS.batch = batch_size = size
+  batch_per_epoch = int(size / batch_size)
+  seq_length = 5 # TODO: get sequence length from parameter -> no access
 
-  for i in range(self.FLAGS.epoch):
+  for epoch in range(self.FLAGS.epoch):
     shuffle_idx = perm(np.arange(size))
-    for b in range(batch_per_epoch):
+    for batch in range(batch_per_epoch):
       # yield these
       x_batch = list()
       feed_batch = dict()
 
-      for j in range(b * batch, b * batch + batch):
-        # TODO: get sequence length from parameter -> no access
-        start_train_instance = data[shuffle_idx[j]] # TODO: data[idx[j]] != data[index]
-        for seq in range(3):
+      for j in range(batch * batch_size, batch * batch_size + batch_size):
+        start_train_instance = data[shuffle_idx[j]]
+        for seq in range(seq_length):
           train_instance = getNextInSequence(start_train_instance, seq, data)
           inp, new_feed = self._batch(train_instance)
 
-          if inp is None: continue
+          if inp is None:
+            continue
           x_batch += [np.expand_dims(inp, 0)]
 
           for key in new_feed:
@@ -135,7 +142,7 @@ def shuffle(self):
       x_batch = np.concatenate(x_batch, 0)
       yield x_batch, feed_batch
 
-    print('Finish {} epoch(es)'.format(i + 1))
+    print('Finish {} epoch(es)'.format(epoch + 1))
 
 
 def getNextInSequence(start_train_instance, seq, data):
@@ -152,7 +159,7 @@ def getNextInSequence(start_train_instance, seq, data):
   try:
     calculated_path = data[index + seq][0]
   except IndexError:
-    getNextInSequence(start_train_instance, seq - 1, data)
+    return getNextInSequence(start_train_instance, seq - 1, data)
 
   if calculated_path == new_path:
     return data[index + seq]
