@@ -50,9 +50,9 @@ def _batch(self, chunk):
 
     # if cx >= W or cy >= H: return None, None
     if cx >= W: #TODO: what case happens here?
-      cx = W
+      cx = W - 0.01
     if cy >= H:
-      cy = H
+      cy = H - 0.01
 
     obj[3] = float(obj[3] - obj[1]) / w
     obj[4] = float(obj[4] - obj[2]) / h
