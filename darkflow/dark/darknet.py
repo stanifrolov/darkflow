@@ -73,6 +73,8 @@ class Darknet(object):
         meta = info
         continue
       else:
+        if info[0] == 'recurrent':
+          info[2] = FLAGS.seq_length
         new = create_darkop(*info)
       layers.append(new)
     return meta, layers

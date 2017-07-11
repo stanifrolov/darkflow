@@ -109,6 +109,9 @@ def predict(self):
     exit('Error: {}'.format(msg.format(inp_path)))
 
   batch = min(self.FLAGS.batch, len(all_inps))
+  # TODO: implement predict case
+  if batch == 1:
+    batch = self.FLAGS.seq_length
 
   # predict in batches
   n_batch = int(math.ceil(len(all_inps) / batch))
