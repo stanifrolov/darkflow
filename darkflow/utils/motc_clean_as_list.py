@@ -48,6 +48,9 @@ def motc_clean_as_list(ANN, exclusive=False):
       splitted_line = line.split(',')
       x_min, y_min, x_max, y_max = motc_gt_to_voc_gt(splitted_line)
 
+      if int(splitted_line[6]) == 0: # confidence = 0; flag to ignore entry; see motc submission instructions faq
+        continue
+
       # clip bounding box to img border
       if x_min < 0:
         x_min = 0
