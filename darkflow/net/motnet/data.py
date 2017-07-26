@@ -49,7 +49,7 @@ def _batch(self, chunk):
     cy = centery / celly
 
     # if cx >= W or cy >= H: return None, None
-    if cx >= W: # TODO: implement clipping outer object to img border
+    if cx >= W: # TODO: check after implemented clipping outer objects to img border
       cx = W - 0.01
     if cy >= H:
       cy = H - 0.01
