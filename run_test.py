@@ -16,7 +16,7 @@ Working configs
 """
 Training
 """
-command = './flow --model cfg/full_motnet.cfg --load 5000 --train --gpu 0.9'
+command = './flow --model cfg/full_motnet.cfg --load 17000 --train --gpu 0.9'
 
 """
 Run the command
