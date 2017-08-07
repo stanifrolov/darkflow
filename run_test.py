@@ -17,10 +17,15 @@ Working configs
 #command = './flow --model cfg/tiny-yolo-voc.cfg --load bin/tiny-yolo-voc.weights'
 
 """
-Training
+Training Commands
 """
 #command = './flow --model cfg/full_motnet.cfg --load bin/yolo.weights --train --gpu 0.9 --seq_length 10'
-command = './flow --model cfg/tiny_motnet.cfg --load bin/tiny-yolo-voc.weights --train --gpu 0.9 --seq_length 3'
+#command = './flow --model cfg/tiny_motnet.cfg --load bin/tiny-yolo-voc.weights --train --gpu 0.9 --seq_length 3'
+
+"""
+Training on Machine
+"""
+command = './flow --model cfg/full_motnet.cfg --load 17000 --train --gpu 0.9'
 
 """
 Run the command
