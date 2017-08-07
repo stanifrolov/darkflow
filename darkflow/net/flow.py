@@ -1,7 +1,10 @@
 import os
 import pickle
 import time
+import tensorflow as tf
 from multiprocessing.pool import ThreadPool
+from tensorflow.python.client import timeline
+
 
 import numpy as np
 
@@ -50,7 +53,17 @@ def train(self):
     feed_dict.update(self.feed)
 
     fetches = [self.train_op, loss_op, self.summary_op]
-    fetched = self.sess.run(fetches, feed_dict)
+
+    options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+    run_metadata = tf.RunMetadata()
+
+    fetched = self.sess.run(fetches, feed_dict, options=options, run_metadata=run_metadata)
+
+    fetched_timeline = timeline.Timeline(run_metadata.step_stats)
+    chrome_trace = fetched_timeline.generate_chrome_trace_format()
+    with open('timeline_step_%d.json' % i, 'w') as f:
+      f.write(chrome_trace)
+
     loss = fetched[1]
 
     if loss_mva is None: loss_mva = loss
