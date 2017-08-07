@@ -5,13 +5,12 @@ from .baseop import BaseOp
 
 class recurrent(BaseOp):
   def forward(self):
-    batch_size = 2 # TODO: get batch size from flags
     _X = self.inp.out
     input_shape = tf.shape(_X)[0]
     num_units = _X.shape.dims[1].value * _X.shape.dims[2].value * _X.shape.dims[3].value
     _X_list = tf.reshape(_X, [input_shape, num_units])
     _X_list = tf.split(_X_list, self.lay.seq_length, 0)
-
+    batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
       cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)

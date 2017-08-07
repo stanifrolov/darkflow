@@ -112,7 +112,7 @@ def cfg_yielder(model, binary):
       l = w * h * c
     # -----------------------------------------------------
     elif d['type'] == '[recurrent]':
-      seq_length = d.get('seq_length')
+      seq_length = 1 # just in case
       yield ['recurrent', i, seq_length]
     # -----------------------------------------------------
     elif d['type'] == '[maxpool]':

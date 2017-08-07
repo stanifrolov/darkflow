@@ -49,3 +49,6 @@ ckpt/*
 MOTC/
 VOCdevkit/
 darkflow/cython_utils/
+
+#timelines
+timeline_step_*.json

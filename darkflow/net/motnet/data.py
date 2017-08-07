@@ -49,7 +49,7 @@ def _batch(self, chunk):
     cy = centery / celly
 
     # if cx >= W or cy >= H: return None, None
-    if cx >= W: # TODO: implement clipping outer object to img border
+    if cx >= W:
       cx = W - 0.01
     if cy >= H:
       cy = H - 0.01
@@ -111,7 +111,7 @@ def shuffle(self):
   print('Dataset of {} instance(s)'.format(size))
   if batch_size > size: self.FLAGS.batch = batch_size = size
   batch_per_epoch = int(size / batch_size)
-  seq_length = 10 # TODO: get sequence length from flags
+  seq_length = self.FLAGS.seq_length
 
   for epoch in range(self.FLAGS.epoch):
     shuffle_idx = perm(np.arange(size))
@@ -120,9 +120,8 @@ def shuffle(self):
       x_batch = list()
       feed_batch = dict()
 
-      for j in range(batch * batch_size, batch * batch_size + batch_size):
-        start_train_instance = data[shuffle_idx[j]]
-        # TODO: check if enough subsequent images for sequence
+      for step in range(batch * batch_size, batch * batch_size + batch_size):
+        start_train_instance = data[min(shuffle_idx[step], size - seq_length)]
         for seq in range(seq_length):
           train_instance = getNextInSequence(start_train_instance, seq, data)
           inp, new_feed = self._batch(train_instance)
@@ -157,9 +156,11 @@ def getNextInSequence(start_train_instance, seq, data):
   try:
     calculated_path = data[index + seq][0]
   except IndexError:
+    print("WARNING: Wanted to use image with sequence out of range. Call getNextInSequence")
     return getNextInSequence(start_train_instance, seq - 1, data)
 
   if calculated_path == new_path:
     return data[index + seq]
   else:
+    print("WARNING: Wanted to use image with sequence out of range. Call getNextInSequence")
     return getNextInSequence(start_train_instance, seq - 1, data)
