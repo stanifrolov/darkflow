@@ -122,7 +122,7 @@ def predict(self):
     exit('Error: {}'.format(msg.format(inp_path)))
 
   batch = min(self.FLAGS.batch, len(all_inps))
-  # TODO: implement predict case with long sequence size (implement overlap on end of sequence)
+  # TODO: implement predict case with long sequence size (implement overlap on end of sequence or load next with saved state)
   if batch == 1:
     batch = self.FLAGS.seq_length
 

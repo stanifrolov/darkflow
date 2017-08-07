@@ -156,11 +156,11 @@ def getNextInSequence(start_train_instance, seq, data):
   try:
     calculated_path = data[index + seq][0]
   except IndexError:
-    print("WARNING: Wanted to use image with sequence out of range. Call getNextInSequence")
+    print("WARNING - IndexError: Wanted to use image with sequence out of range. Call getNextInSequence")
     return getNextInSequence(start_train_instance, seq - 1, data)
 
   if calculated_path == new_path:
     return data[index + seq]
   else:
-    print("WARNING: Wanted to use image with sequence out of range. Call getNextInSequence")
+    print("WARNING WrongPath - Wanted to use image with sequence out of range. Call getNextInSequence")
     return getNextInSequence(start_train_instance, seq - 1, data)
