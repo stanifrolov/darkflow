@@ -116,9 +116,10 @@ import math
 
 
 def predict(self):
-  inp_path = self.FLAGS.imgdir
+  inp_path = self.FLAGS.imgdirss
   all_inps = os.listdir(inp_path)
   all_inps = [i for i in all_inps if self.framework.is_inp(i)]
+  all_inps.sort()
   if not all_inps:
     msg = 'Failed to find any images in {} .'
     exit('Error: {}'.format(msg.format(inp_path)))
