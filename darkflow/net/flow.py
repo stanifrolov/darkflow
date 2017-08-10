@@ -116,7 +116,7 @@ import math
 
 
 def predict(self):
-  inp_path = self.FLAGS.imgdirss
+  inp_path = self.FLAGS.imgdir
   all_inps = os.listdir(inp_path)
   all_inps = [i for i in all_inps if self.framework.is_inp(i)]
   all_inps.sort()
