@@ -117,20 +117,21 @@ def shuffle(self):
   for epoch in range(self.FLAGS.epoch):
     shuffle_idx = perm(np.arange(size))
     for batch in range(batch_per_epoch):
-      # yield these
       x_batch = list()
       feed_batch = dict()
 
       for step in range(batch * batch_size, batch * batch_size + batch_size):
-        start_train_instance = data[shuffle_idx[step]] # size must be size of current folder lol
-        #start_train_instance = fitToSequence(start_train_instance, self.FLAGS.dataset, data, seq_length)
-        print("start_img is " + data[data.index(start_train_instance)][0])
+        start_img = data[shuffle_idx[step]]
+        start_img = fit_to_seq_length(self.FLAGS.dataset, data, start_img, seq_length)
+        idx_of_start = data.index(start_img)
+        print("start_img is " + start_img[0])
         for seq in range(seq_length):
-          train_instance = getNextInSequence(start_train_instance, seq, data)
-          print("train_img is " + data[data.index(train_instance)][0])
-          inp, new_feed = self._batch(train_instance)
+          train_instance = data[idx_of_start + seq]
+          print("train_img is " + train_instance[0])
 
+          inp, new_feed = self._batch(train_instance)
           if inp is None:
+            print("WARNING: Input is None - Continue Feed Loop")
             continue
           x_batch += [np.expand_dims(inp, 0)]
 
@@ -148,50 +149,15 @@ def shuffle(self):
     print('Finish {} epoch(es)'.format(epoch + 1))
 
 
-def getNextInSequence(start_train_instance, seq, data):
-  index = data.index(start_train_instance)
-  path_start = data[index][0]
-  img = path_start.split("/")[2]
-  number = int(img.split(".")[0])
-  next_number = number + seq
-  next_number = format(next_number, '06d')
-  new_path = path_start.split("/")[0] + "/" + path_start.split("/")[1] + "/" + next_number + ".jpg"
-  
-  try:
-      calculated_path = data[index + seq][0]
-  except IndexError:
-      print("IndexError: Wanted to access %d", (index + seq))
-      return getNextInSequence(start_train_instance, seq - 1, data)
-
-  if calculated_path == new_path:
-    return data[index + seq]
-  else:
-    print("WARNING WrongPath - calculated_path is " + calculated_path + " - new_path is " + new_path + " - Call getNextInSequence")
-    return getNextInSequence(start_train_instance, seq - 1, data)
-
-
-def fitToSequence(start_train_instance, pathToDataset, data, seq_length):
-    numOfImgInSet = getNumOfImgInPath(pathToDataset, start_train_instance)
-    if enoughImgLeft(start_train_instancen, numOfImgInSet, seq_length):
-        return start_train_instance
+def fit_to_seq_length(path_to_dataset, data, start_img, seq_length):
+    path_to_img = path_to_dataset + start_img[0].split("/")[0] + "/img1"
+    num_of_img_in_set = get_num_of_img_in_set(path_to_img)
+    num_of_start_img = int(start_img[0].split("/")[2].split(".")[0])
+    if num_of_start_img < (num_of_img_in_set - seq_length):
+      return start_img
     else:
-        minIdx = numOfImgInSet - seq_length
-        # find instance in choosen set with img number = minIdx
-        return data.index(start_train_instance)
+      return data[data.index(start_img) - (num_of_img_in_set - num_of_start_img)]
 
-def getNumOfImgInPath(pathToDataset, pathToImg):
-    path = pathToImg.split("/")[0] + "/" + pathToImg.split("/")[1]
-    numOfImgInPath = len(glob.glob1(pathToDataset + path, "*.jpg"))
-    return numOfImgInPath
-    
-def enoughImgLeft(start_train_instance, numOfImgInSet, seq_length): #TODO go here
-    index = data.index(start_train_instance)
-    path_start = data[index][0]
-    img = path_start.split("/")[2]
-    
-    
-    
-    
-    
-    
-    
+
+def get_num_of_img_in_set(path_to_img):
+  return len(glob.glob1(path_to_img, "*.jpg"))
