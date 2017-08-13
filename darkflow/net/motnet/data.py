@@ -1,4 +1,5 @@
 import os
+import glob
 from copy import deepcopy
 
 import numpy as np
@@ -121,9 +122,12 @@ def shuffle(self):
       feed_batch = dict()
 
       for step in range(batch * batch_size, batch * batch_size + batch_size):
-        start_train_instance = data[min(shuffle_idx[step], size - seq_length)]
+        start_train_instance = data[shuffle_idx[step]] # size must be size of current folder lol
+        #start_train_instance = fitToSequence(start_train_instance, self.FLAGS.dataset, data, seq_length)
+        print("start_img is " + data[data.index(start_train_instance)][0])
         for seq in range(seq_length):
           train_instance = getNextInSequence(start_train_instance, seq, data)
+          print("train_img is " + data[data.index(train_instance)][0])
           inp, new_feed = self._batch(train_instance)
 
           if inp is None:
@@ -152,15 +156,42 @@ def getNextInSequence(start_train_instance, seq, data):
   next_number = number + seq
   next_number = format(next_number, '06d')
   new_path = path_start.split("/")[0] + "/" + path_start.split("/")[1] + "/" + next_number + ".jpg"
-
+  
   try:
-    calculated_path = data[index + seq][0]
+      calculated_path = data[index + seq][0]
   except IndexError:
-    print("WARNING - IndexError: Wanted to use image with sequence out of range. Call getNextInSequence")
-    return getNextInSequence(start_train_instance, seq - 1, data)
+      print("IndexError: Wanted to access %d", (index + seq))
+      return getNextInSequence(start_train_instance, seq - 1, data)
 
   if calculated_path == new_path:
     return data[index + seq]
   else:
-    print("WARNING WrongPath - Wanted to use image with sequence out of range. Call getNextInSequence")
+    print("WARNING WrongPath - calculated_path is " + calculated_path + " - new_path is " + new_path + " - Call getNextInSequence")
     return getNextInSequence(start_train_instance, seq - 1, data)
+
+
+def fitToSequence(start_train_instance, pathToDataset, data, seq_length):
+    numOfImgInSet = getNumOfImgInPath(pathToDataset, start_train_instance)
+    if enoughImgLeft(start_train_instancen, numOfImgInSet, seq_length):
+        return start_train_instance
+    else:
+        minIdx = numOfImgInSet - seq_length
+        # find instance in choosen set with img number = minIdx
+        return data.index(start_train_instance)
+
+def getNumOfImgInPath(pathToDataset, pathToImg):
+    path = pathToImg.split("/")[0] + "/" + pathToImg.split("/")[1]
+    numOfImgInPath = len(glob.glob1(pathToDataset + path, "*.jpg"))
+    return numOfImgInPath
+    
+def enoughImgLeft(start_train_instance, numOfImgInSet, seq_length): #TODO go here
+    index = data.index(start_train_instance)
+    path_start = data[index][0]
+    img = path_start.split("/")[2]
+    
+    
+    
+    
+    
+    
+    

@@ -74,7 +74,7 @@ def preprocess(self, im, allobj=None):
       obj_1_ = obj[1]
       obj[1] = dims[0] - obj[3]
       obj[3] = dims[0] - obj_1_
-    #im = imcv2_recolor(im)
+    #im = imcv2_recolor(im) # a real speed killer
 
   im = self.resize_input(im)
   if allobj is None: return im

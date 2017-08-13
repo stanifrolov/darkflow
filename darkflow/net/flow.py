@@ -55,16 +55,16 @@ def train(self):
 
     fetches = [self.train_op, loss_op, self.summary_op]
 
-    options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
-    run_metadata = tf.RunMetadata()
+    #options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+    #run_metadata = tf.RunMetadata()
 
-    fetched = self.sess.run(fetches, feed_dict, options=options, run_metadata=run_metadata)
-    #fetched = self.sess.run(fetches, feed_dict)
+    #fetched = self.sess.run(fetches, feed_dict, options=options, run_metadata=run_metadata)
+    fetched = self.sess.run(fetches, feed_dict)
 
-    fetched_timeline = timeline.Timeline(run_metadata.step_stats)
-    chrome_trace = fetched_timeline.generate_chrome_trace_format()
-    with open('timeline_step_%d.json' % i, 'w') as f:
-      f.write(chrome_trace)
+    #fetched_timeline = timeline.Timeline(run_metadata.step_stats)
+    #chrome_trace = fetched_timeline.generate_chrome_trace_format()
+    #with open('timeline_step_%d.json' % i, 'w') as f:
+      #f.write(chrome_trace)
 
     loss = fetched[1]
 
