@@ -41,7 +41,7 @@ Training Commands
 Training on Machine
 """
 last_ckpt = getLatestCheckpoint()
-command = './flow --model cfg/full_motnet.cfg --train --gpu 0.9 --batch 1 --seq_length 2' + ' --load ' + last_ckpt 
+command = './flow --model cfg/full_motnet.cfg --train --gpu 0.9' + ' --load ' + last_ckpt 
 
 """
 Run the command
