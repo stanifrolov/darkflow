@@ -153,10 +153,12 @@ def fit_to_seq_length(path_to_dataset, data, start_img, seq_length):
     path_to_img = path_to_dataset + start_img[0].split("/")[0] + "/img1"
     num_of_img_in_set = get_num_of_img_in_set(path_to_img)
     num_of_start_img = int(start_img[0].split("/")[2].split(".")[0])
-    if num_of_start_img < (num_of_img_in_set - seq_length):
+    if num_of_start_img <= (num_of_img_in_set - seq_length + 1):
       return start_img
     else:
-      return data[data.index(start_img) - (num_of_img_in_set - num_of_start_img)]
+      new_start_img = data[data.index(start_img) - seq_length + 1]
+      print("INFO: Fit to sequence - wanted " + start_img[0] + " - but now take " + new_start_img[0])
+      return new_start_img
 
 
 def get_num_of_img_in_set(path_to_img):
