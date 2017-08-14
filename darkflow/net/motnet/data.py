@@ -38,7 +38,7 @@ def _batch(self, chunk):
   w, h, allobj_ = chunk[1]
   allobj = deepcopy(allobj_)
   path = os.path.join(self.FLAGS.dataset, jpg)
-  img = self.preprocess(path, allobj)
+  img = self.preprocess(path, allobj) # set allobj to None to disable noise augm for overfit
 
   # Calculate regression target
   cellx = 1. * w / W
