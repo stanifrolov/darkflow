@@ -1,19 +1,4 @@
 from darkflow.cli import cliHandler
-import os
-
-def getLatestCheckpoint():
-    imgdir = os.path.join('/home/frolov/U/darkflow/ckpt')  # gibt path von Checkpoints an
-    file_list = []
-    for dirpath, dirnames, files in os.walk(imgdir):   # os.walk gibt Pfad an, alle Ordner im Ordner und alle Dateien im Ordner.
-            for f in files:
-                if f.endswith('.index'):
-                    filename = os.path.join(dirpath, f)
-                    file_list.append(filename)
-    file_list.sort()
-    file = file_list[len(file_list) - 1]
-    file = file.split('.index')
-    file = file[0].split('-')
-    return file[len(file) - 1]
 
 """
 Test data
@@ -40,8 +25,7 @@ Training Commands
 """
 Training on Machine
 """
-last_ckpt = getLatestCheckpoint()
-command = './flow --model cfg/full_motnet.cfg --train --gpu 0.9 --batch 1 --seq_length 2' + ' --load ' + last_ckpt 
+command = './flow --model cfg/full_motnet.cfg --train --load -1 --gpu 0.9 --batch 2 --seq_length 10'
 
 """
 Run the command
