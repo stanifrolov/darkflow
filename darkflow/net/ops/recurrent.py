@@ -15,6 +15,7 @@ class recurrent(BaseOp):
     with tf.variable_scope(self.scope) as scope:
       cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
       state = (tf.zeros([batch_size, num_units]),) * 2
+      #state = tf.contrib.rnn.LSTMStateTuple(tf.zeros([batch_size, num_units]), tf.zeros([batch_size, num_units]))
       out = []
 
       for step in range(self.lay.seq_length):
