@@ -18,7 +18,7 @@ def build_train_op(self):
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](self.FLAGS.lr) # TODO: learn schedule; see Ole script
   gradients = optimizer.compute_gradients(self.framework.loss)
-  #capped_gvs = [(tf.clip_by_value(gradients, -1., 1.), var) for grad, var in gradients]
+  #capped_gvs = [(tf.clip_by_value(gradients, -1., 1.), var) for grad, var in gradients] # tf.clip_by_global_norm
   self.train_op = optimizer.apply_gradients(gradients)
 
 
