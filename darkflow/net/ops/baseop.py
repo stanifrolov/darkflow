@@ -74,10 +74,14 @@ class BaseOp(object):
     self.lay.w[var] = tf.constant_initializer(val)
     if var in self._SLIM: return
     with tf.variable_scope(self.scope):
+      trainable = False
+      if self.scope == "53-recurrent":
+        trainable = True
       self.lay.w[var] = tf.get_variable(var,
                                         shape=self.lay.wshape[var],
                                         dtype=tf.float32,
-                                        initializer=self.lay.w[var])
+                                        initializer=self.lay.w[var],
+                                        trainable=trainable)
 
   def wrap_pholder(self, ph, feed):
     """wrap layer.h into placeholders"""
