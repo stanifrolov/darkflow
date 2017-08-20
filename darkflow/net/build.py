@@ -126,14 +126,14 @@ class TFNet(object):
   def setup_meta_ops(self):
     cfg = dict({
       'allow_soft_placement': False,
-      'log_device_placement': False
+      'log_device_placement': True
     })
 
     utility = min(self.FLAGS.gpu, 1.)
     if utility > 0.0:
       self.say('GPU mode with {} usage'.format(utility))
       cfg['gpu_options'] = tf.GPUOptions(
-        per_process_gpu_memory_fraction=utility, allow_growth=True)
+        per_process_gpu_memory_fraction=utility, allow_growth=False)
       cfg['allow_soft_placement'] = True
     else:
       self.say('Running entirely on CPU')
