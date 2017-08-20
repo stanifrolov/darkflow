@@ -17,7 +17,10 @@ def _fix(obj, dims, scale, offs):
 
 def resize_input(self, im):
   h, w, c = self.meta['inp_size']
-  imsz = cv2.resize(im, (w, h))
+  if not self.FLAGS.train:
+    imsz = cv2.resize(im, (w, h))
+  else:
+    imsz = im
   imsz = imsz / 255.
   imsz = imsz[:, :, ::-1]
   return imsz
