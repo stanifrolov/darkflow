@@ -16,8 +16,8 @@ def _pp(l):  # pretty printing
 def motc_clean_as_list(ANN, exclusive=False):
   start_directory = os.getcwd()
 
-  if os.path.isfile("motc_dump.p"):
-    return pickle.load(open('motc_dump.p', 'rb'))
+  if os.path.isfile("motc_dump_resized.p"):
+    return pickle.load(open('motc_dump_resized.p', 'rb'))
 
   os.chdir(ANN)
   annotations = glob.glob('*FRCNN')
@@ -71,8 +71,11 @@ def motc_clean_as_list(ANN, exclusive=False):
 
       frame_number = int(splitted_line[0])
       key = str(folder + "/img1/" + '{:06d}'.format(frame_number) + ".jpg")
+      x_min, y_min, x_max, y_max = resize_gt(img_width, img_height, x_min, y_min, x_max, y_max)
       if key not in dumps:
-        dumps[key] = [img_width, img_height, [["object", x_min, y_min, x_max, y_max]]]
+        width = 416
+        height = 416
+        dumps[key] = [width, height, [["object", x_min, y_min, x_max, y_max]]]
       else:
         dumps[key][2].append(["object", x_min, y_min, x_max, y_max])
 
@@ -100,7 +103,7 @@ def motc_clean_as_list(ANN, exclusive=False):
   os.chdir(start_directory)
 
   dumplist.sort()
-  pickle.dump(dumplist, open('motc_dump.p', 'wb'))
+  pickle.dump(dumplist, open('motc_dump_resized.p', 'wb'))
   return dumplist
 
 
@@ -114,3 +117,9 @@ def motc_gt_to_voc_gt(splitted_line):
   x_max = bb_left + bb_width
   y_max = bb_top + bb_height
   return x_min, y_min, x_max, y_max
+
+
+def resize_gt(img_width, img_height, x_min, y_min, x_max, y_max):
+  scale_x = img_width / 416
+  scale_y = img_height / 416
+  return int(x_min/scale_x), int(y_min/scale_y), int(x_max/scale_x), int(y_max/scale_y)

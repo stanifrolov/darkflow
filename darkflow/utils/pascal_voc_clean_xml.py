@@ -3,6 +3,7 @@ parse PASCAL VOC xml annotations
 """
 
 import os
+import pickle
 import sys
 import xml.etree.ElementTree as ET
 import glob
@@ -75,4 +76,6 @@ def pascal_voc_clean_xml(ANN, pick, exclusive = False):
     print('Dataset size: {}'.format(len(dumps)))
 
     os.chdir(cur_dir)
+    dumps.sort()
+    pickle.dump(dumps, open('voc_dump.p', 'wb'))
     return dumps
