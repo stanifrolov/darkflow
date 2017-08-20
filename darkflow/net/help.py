@@ -17,10 +17,10 @@ def build_train_op(self):
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](self.FLAGS.lr) # TODO: learn schedule; see Ole script
-  self.train_op = optimizer.minimize(self.framework.loss, var_list=[var for var in tf.trainable_variables() if "recurrent" in var.name])
-  #gradients = optimizer.compute_gradients(self.framework.loss)
+  #self.train_op = optimizer.minimize(self.framework.loss, var_list=[var for var in tf.trainable_variables() if "recurrent" in var.name])
+  gradients = optimizer.compute_gradients(self.framework.loss)
   #capped_gvs = [(tf.clip_by_value(gradients, -1., 1.), var) for grad, var in gradients] # tf.clip_by_global_norm
-  #self.train_op = optimizer.apply_gradients(gradients)
+  self.train_op = optimizer.apply_gradients(gradients)
 
 
 def load_from_ckpt(self):
