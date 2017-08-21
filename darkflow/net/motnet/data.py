@@ -3,7 +3,8 @@ import glob
 from copy import deepcopy
 
 import numpy as np
-from numpy.random import permutation as perm, random
+from numpy.random import permutation as perm
+import random as random
 
 from darkflow.utils.motc_clean_as_list import motc_clean_as_list
 
@@ -124,10 +125,12 @@ def shuffle(self):
         start_img = data[shuffle_idx[step]]
         start_img = fit_to_seq_length(self.FLAGS.dataset, data, start_img, seq_length)
         idx_of_start = data.index(start_img)
-        print("start_img is " + start_img[0])
+        #print("start_img is " + start_img[0])
         for seq in range(seq_length):
           #train_instance = data[idx_of_start + seq]
-          train_instance = data[random.randrange(5)]
+          jo = random.choice([0, 1000, 2000, 3000, 4000])
+          print(jo)
+          train_instance = data[jo]
           print("train_img is " + train_instance[0])
 
           inp, new_feed = self._batch(train_instance)

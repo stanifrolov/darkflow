@@ -64,7 +64,7 @@ def train(self):
     #fetched_timeline = timeline.Timeline(run_metadata.step_stats)
     #chrome_trace = fetched_timeline.generate_chrome_trace_format()
     #with open('timeline_step_%d.json' % i, 'w') as f:
-      #f.write(chrome_trace)
+    #f.write(chrome_trace)
 
     loss = fetched[1]
 
@@ -76,12 +76,14 @@ def train(self):
 
     form = 'step {} - loss {} - moving ave loss {}'
     self.say(form.format(step_now, loss, loss_mva))
+
     profile += [(loss, loss_mva)]
 
     ckpt = (i + 1) % (self.FLAGS.save // self.FLAGS.batch)
     args = [step_now, profile]
     if not ckpt:
       _save_ckpt(self, *args)
+      send_email(step_now, loss, loss_mva)
 
 def return_predict(self, im):
   assert isinstance(im, np.ndarray), \
@@ -170,3 +172,24 @@ def predict(self):
     # Timing
     self.say('Total time = {}s / {} inps = {} ips'.format(
       last, len(inp_feed), len(inp_feed) / last))
+
+
+import smtplib
+import time
+from motc_utils.mail_settings import *
+
+def send_email(step, loss, loss_mva):
+
+    header  = 'From: %s\n' % from_addr
+    header += 'To: %s\n' % ','.join(to_addr_list)
+    header += 'Subject: %s\n\n' % subject
+
+    message = header + 'step: ' + str(step) +  ' loss: ' + str(loss) + " loss_mva: " + str(loss_mva)
+
+    server = smtplib.SMTP('smtp.gmail.com:587')
+    server.starttls()
+    server.login(login, password)
+
+    problems = server.sendmail(from_addr, to_addr_list, message)
+
+    server.quit()
