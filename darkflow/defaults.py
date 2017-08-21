@@ -15,15 +15,15 @@ class argHandler(dict):
     #self.define('dataset', '/home/frolov/U/MOTC/MOT17/train/', 'path to dataset directory')
     #self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/', 'path to dataset directory')
     #self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/JPEGImages/', 'path to dataset directory')
-        
+
     self.define('annotation', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/storage_local/frolov/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/home/frolov/U/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/','path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/Annotations/','path to annotation directory')
 
-    self.define('backup', './ckpt_overfit_yolo/', 'path to backup folder')
-    self.define('summary', './summary_overfit_yolo/', 'path to TensorBoard summaries directory')
+    self.define('backup', './ckpt_overfit_motnet_scratch/', 'path to backup folder')
+    self.define('summary', './summary_overfit_motnet_scratch/', 'path to TensorBoard summaries directory')
     self.define('threshold', -0.1, 'detection threshold')
     self.define('model', '', 'configuration of choice')
     self.define('trainer', 'adam', 'training algorithm')
