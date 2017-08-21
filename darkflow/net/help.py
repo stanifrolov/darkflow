@@ -14,13 +14,21 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 
 def build_train_op(self):
+  global_step = tf.Variable(0, trainable=False)
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
-  optimizer = self._TRAINER[self.FLAGS.trainer](self.FLAGS.lr) # TODO: learn schedule; see Ole script
-  #self.train_op = optimizer.minimize(self.framework.loss, var_list=[var for var in tf.trainable_variables() if "recurrent" in var.name])
-  gradients = optimizer.compute_gradients(self.framework.loss)
+  learningRate = tf.train.exponential_decay(
+                self.FLAGS.lr,              # Base learning rate.
+                global_step,
+                500,               # Decay step.
+                0.9,                 # Decay rate.
+                staircase=True)
+  optimizer = self._TRAINER[self.FLAGS.trainer](learningRate) # TODO: learn schedule; see Ole script
+  #var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # param for minimize
+  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
+  #gradients = optimizer.compute_gradients(self.framework.loss)
   #capped_gvs = [(tf.clip_by_value(gradients, -1., 1.), var) for grad, var in gradients] # tf.clip_by_global_norm
-  self.train_op = optimizer.apply_gradients(gradients)
+  #self.train_op = optimizer.apply_gradients(gradients)
 
 
 def load_from_ckpt(self):

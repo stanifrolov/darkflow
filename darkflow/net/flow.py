@@ -42,6 +42,7 @@ def train(self):
   loss_op = self.framework.loss
 
   for i, (x_batch, datum) in enumerate(batches):
+    start = time.time()
     if not i: self.say(train_stats.format(
       self.FLAGS.lr, self.FLAGS.batch,
       self.FLAGS.epoch, self.FLAGS.save
@@ -73,9 +74,10 @@ def train(self):
     step_now = self.FLAGS.load + i + 1
 
     self.writer.add_summary(fetched[2], step_now)
+    stop = time.time()
 
-    form = 'step {} - loss {} - moving ave loss {}'
-    self.say(form.format(step_now, loss, loss_mva))
+    form = 'step {} - lr {} - loss {} - moving ave loss {} - time {}'
+    self.say(form.format(step_now, self.FLAGS.lr, loss, loss_mva, stop - start))
 
     profile += [(loss, loss_mva)]
 
