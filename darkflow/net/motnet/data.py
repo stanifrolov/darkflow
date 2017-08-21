@@ -128,9 +128,7 @@ def shuffle(self):
         #print("start_img is " + start_img[0])
         for seq in range(seq_length):
           #train_instance = data[idx_of_start + seq]
-          jo = random.choice([0, 1000, 2000, 3000, 4000])
-          print(jo)
-          train_instance = data[jo]
+          train_instance = data[random.choice([0, 1000, 2000, 3000, 4000])]
           print("train_img is " + train_instance[0])
 
           inp, new_feed = self._batch(train_instance)
