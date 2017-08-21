@@ -50,7 +50,7 @@ def postprocess(self, net_out, im, save=True):
     if boxResults is None:
       continue
     left, right, top, bot, mess, max_indx, confidence = boxResults
-    thick = int((h + w) // 300)
+    thick = int((h + w) // 500)
     if self.FLAGS.json:
       line = ('{"label":"%s",'
               '"confidence":%.2f,'
@@ -63,8 +63,7 @@ def postprocess(self, net_out, im, save=True):
     cv2.rectangle(imgcv,
                   (left, top), (right, bot),
                   colors[max_indx], thick)
-    cv2.putText(imgcv, mess, (left, top - 12),
-                0, 1e-3 * h, colors[max_indx], thick // 3)
+    #cv2.putText(imgcv, mess, (left, top - 12), 0, 1e-3 * h, colors[max_indx], thick // 3)
 
   if not save: return imgcv
   # Removing trailing comma+newline adding json list terminator.
