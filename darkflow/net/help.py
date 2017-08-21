@@ -24,8 +24,8 @@ def build_train_op(self):
                 0.9,                 # Decay rate.
                 staircase=True)
   optimizer = self._TRAINER[self.FLAGS.trainer](learningRate) # TODO: learn schedule; see Ole script
-  #var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # param for minimize
-  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
+  var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # param for minimize
+  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list)
   #gradients = optimizer.compute_gradients(self.framework.loss)
   #capped_gvs = [(tf.clip_by_value(gradients, -1., 1.), var) for grad, var in gradients] # tf.clip_by_global_norm
   #self.train_op = optimizer.apply_gradients(gradients)
