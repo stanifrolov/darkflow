@@ -126,7 +126,7 @@ class TFNet(object):
   def setup_meta_ops(self):
     cfg = dict({
       'allow_soft_placement': False,
-      'log_device_placement': True
+      'log_device_placement': False
     })
 
     utility = min(self.FLAGS.gpu, 1.)
