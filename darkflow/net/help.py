@@ -18,8 +18,8 @@ def build_train_op(self):
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](learning_rate(global_step, self))
-  var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # only recurrent layer trainable
-  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list)
+  #var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # only recurrent layer trainable
+  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
   #gradients = optimizer.compute_gradients(self.framework.loss)
   #gradients = [(tf.clip_by_global_norm(gradients, 5.0), var) for grad, var in gradients]
   #self.train_op = optimizer.apply_gradients(gradients)
@@ -29,7 +29,7 @@ def learning_rate(global_step, self):
   learningRate = tf.train.exponential_decay(
     self.FLAGS.lr, # Base learning rate.
     global_step,
-    50, # Decay step.
+    500, # Decay step.
     0.9, # Decay rate.
     staircase=True)
   return learningRate
