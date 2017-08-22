@@ -14,7 +14,7 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 
 def build_train_op(self):
-  global_step = tf.Variable(0, trainable=False, name="global_step")
+  global_step = tf.Variable(self.FLAGS.load, trainable=False, name="global_step")
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](learning_rate(global_step, self))
@@ -26,13 +26,13 @@ def build_train_op(self):
 
 
 def learning_rate(global_step, self):
-  learningRate = tf.train.exponential_decay(
+  self.FLAGS.learningRate = tf.train.exponential_decay(
     self.FLAGS.lr, # Base learning rate.
     global_step,
     500, # Decay step.
     0.9, # Decay rate.
     staircase=True)
-  return learningRate
+  return self.FLAGS.learningRate
 
 
 def load_from_ckpt(self):

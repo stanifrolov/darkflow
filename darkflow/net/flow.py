@@ -54,7 +54,7 @@ def train(self):
     feed_dict[self.inp] = x_batch
     feed_dict.update(self.feed)
 
-    fetches = [self.train_op, loss_op, self.summary_op]
+    fetches = [self.train_op, loss_op, self.summary_op, self.FLAGS.learningRate]
 
     #options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
     #run_metadata = tf.RunMetadata()
@@ -68,6 +68,7 @@ def train(self):
     #f.write(chrome_trace)
 
     loss = fetched[1]
+    lr = fetched[3]
 
     if loss_mva is None: loss_mva = loss
     loss_mva = .9 * loss_mva + .1 * loss
@@ -77,7 +78,7 @@ def train(self):
     stop = time.time()
 
     form = 'step {} - lr {} - loss {} - moving ave loss {} - time {}'
-    self.say(form.format(step_now, self.FLAGS.lr, loss, loss_mva, stop - start)) # TODO: print current learning rate
+    self.say(form.format(step_now, lr, loss, loss_mva, stop - start)) # TODO: print current learning rate
 
     profile += [(loss, loss_mva)]
 
