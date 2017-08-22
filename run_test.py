@@ -25,7 +25,7 @@ Training Commands
 """
 Training on Machine
 """
-command = './flow --model cfg/full_motnet.cfg --train --gpu 0.9 --batch 1 --seq_length 1'
+command = './flow --model cfg/full_motnet.cfg --train --gpu 0.9 --batch 1 --seq_length 5'
 
 """
 Run the command
