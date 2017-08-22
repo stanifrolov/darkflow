@@ -77,7 +77,7 @@ def train(self):
     stop = time.time()
 
     form = 'step {} - lr {} - loss {} - moving ave loss {} - time {}'
-    self.say(form.format(step_now, self.FLAGS.lr, loss, loss_mva, stop - start))
+    self.say(form.format(step_now, self.FLAGS.lr, loss, loss_mva, stop - start)) # TODO: print current learning rate
 
     profile += [(loss, loss_mva)]
 

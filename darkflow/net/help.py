@@ -14,21 +14,25 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 
 def build_train_op(self):
-  global_step = tf.Variable(0, trainable=False)
+  global_step = tf.Variable(0, trainable=False, name="global_step")
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
-  learningRate = tf.train.exponential_decay(
-                self.FLAGS.lr,              # Base learning rate.
-                global_step,
-                500,               # Decay step.
-                0.9,                 # Decay rate.
-                staircase=True)
-  optimizer = self._TRAINER[self.FLAGS.trainer](learningRate) # TODO: learn schedule; see Ole script
-  var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # param for minimize
-  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list)
+  optimizer = self._TRAINER[self.FLAGS.trainer](learning_rate(global_step, self))
+  #var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # only recurrent layer trainable
+  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
   #gradients = optimizer.compute_gradients(self.framework.loss)
-  #capped_gvs = [(tf.clip_by_value(gradients, -1., 1.), var) for grad, var in gradients] # tf.clip_by_global_norm
+  #gradients = [(tf.clip_by_global_norm(gradients, 5.0), var) for grad, var in gradients]
   #self.train_op = optimizer.apply_gradients(gradients)
+
+
+def learning_rate(global_step, self):
+  learningRate = tf.train.exponential_decay(
+    self.FLAGS.lr, # Base learning rate.
+    global_step,
+    1, # Decay step.
+    0.9, # Decay rate.
+    staircase=True)
+  return learningRate
 
 
 def load_from_ckpt(self):
@@ -46,7 +50,8 @@ def load_from_ckpt(self):
   try:
     self.saver.restore(self.sess, load_point)
   except:
-    load_old_graph(self, load_point)
+    #load_old_graph(self, load_point)
+    pass
 
 
 def say(self, *msgs):
