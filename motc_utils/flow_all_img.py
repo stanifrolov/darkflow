@@ -1,6 +1,5 @@
 from darkflow.cli import cliHandler
 
-
 all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/train/MOT17-04-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/train/MOT17-05-FRCNN/img1',
@@ -17,7 +16,7 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-14-FRCNN/img1']
         
 for path in all_dirs:
-    print("Now flowing " + dir)
+    print("Now flowing " + path)
     command = './flow --imgdir ' + path + ' --model cfg/yolo.cfg --load -1'
     command = command.split()
     cliHandler(command)
