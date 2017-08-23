@@ -13,7 +13,9 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-07-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-08-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-12-FRCNN/img1',
-            '/home/frolov/U/MOTC/MOT17/test/MOT17-14-FRCNN/img1']
+            '/home/frolov/U/MOTC/MOT17/test/MOT17-14-FRCNN/img1',
+            '/home/frolov/U/boy',
+            '/home/frolov/U/tud']
         
 for path in all_dirs:
     print("Now flowing " + path)
