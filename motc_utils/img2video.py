@@ -20,5 +20,5 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1/out',
 for folder in all_dirs:
   file_list = os.listdir(folder)
   os.chdir(folder)
-  command = "ffmpeg -framerate 25 -pattern_type glob -i '*.jpg' video.mp4"
+  command = "ffmpeg -y -framerate 25 -pattern_type glob -i '*.jpg' video.mp4"
   subprocess.Popen(command, shell=True)
