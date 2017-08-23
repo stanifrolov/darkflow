@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1/out',
             '/home/frolov/U/MOTC/MOT17/train/MOT17-04-FRCNN/img1/out',
@@ -20,4 +21,4 @@ for folder in all_dirs:
   file_list = os.listdir(folder)
   os.chdir(folder)
   command = "ffmpeg -framerate 25 -pattern_type glob -i '*.jpg' video.mp4"
-  os.subprocess.Popen(command, shell=True)
+  subprocess.Popen(command, shell=True)
