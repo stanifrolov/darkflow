@@ -86,7 +86,7 @@ def train(self):
     args = [step_now, profile]
     if not ckpt:
       _save_ckpt(self, *args)
-      send_email(step_now, loss, loss_mva)
+      send_email(step_now, lr, loss, loss_mva, stop - start)
 
 def return_predict(self, im):
   assert isinstance(im, np.ndarray), \
@@ -181,13 +181,13 @@ import smtplib
 import time
 from motc_utils.mail_settings import *
 
-def send_email(step, loss, loss_mva):
+def send_email(step, lr, loss, loss_mva, time):
 
     header  = 'From: %s\n' % from_addr
     header += 'To: %s\n' % ','.join(to_addr_list)
     header += 'Subject: %s\n\n' % subject
 
-    message = header + 'step: ' + str(step) +  ' loss: ' + str(loss) + " loss_mva: " + str(loss_mva)
+    message = header + 'step: ' + str(step) +  ' lr: ' + str(lr) + ' loss: ' + str(loss) + " loss_mva: " + str(loss_mva) + ' time: ' + time
 
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
