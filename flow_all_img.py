@@ -19,6 +19,6 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
         
 for path in all_dirs:
     print("Now flowing " + path)
-    command = './flow --imgdir ' + path + ' --model cfg/yolo.cfg --load -1'
+    command = './flow --imgdir ' + path + ' --model cfg/yolo.cfg --load -1 --gpu 0.9 --batch 16 --seq_length 1'
     command = command.split()
     cliHandler(command)
