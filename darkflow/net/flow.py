@@ -187,7 +187,7 @@ def send_email(step, lr, loss, loss_mva, time):
     header += 'To: %s\n' % ','.join(to_addr_list)
     header += 'Subject: %s\n\n' % subject
 
-    message = header + 'step: ' + str(step) +  ' lr: ' + str(lr) + ' loss: ' + str(loss) + " loss_mva: " + str(loss_mva) + ' time: ' + time
+    message = header + 'step: ' + str(step) +  ' lr: ' + str(lr) + ' loss: ' + str(loss) + " loss_mva: " + str(loss_mva) + ' time: ' + str(time)
 
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
