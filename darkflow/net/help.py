@@ -14,7 +14,7 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 
 def build_train_op(self):
-  global_step = tf.Variable(self.FLAGS.load, trainable=False, name="global_step")
+  global_step = tf.Variable(0, trainable=False, name="global_step_new")
   #self.framework.loss(self.top.inp.out) # last layer before recurrent
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
@@ -30,7 +30,7 @@ def learning_rate(global_step, self):
   self.FLAGS.learningRate = tf.train.exponential_decay(
     self.FLAGS.lr, # Base learning rate.
     global_step,
-    20, # Decay step.
+    500, # Decay step.
     0.9, # Decay rate.
     staircase=True)
   return self.FLAGS.learningRate
@@ -53,7 +53,6 @@ def load_from_ckpt(self):
   except:
     #load_old_graph(self, load_point)
     pass
-
 
 def say(self, *msgs):
   if not self.FLAGS.verbalise:
