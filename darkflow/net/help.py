@@ -15,6 +15,7 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 def build_train_op(self):
   global_step = tf.Variable(self.FLAGS.load, trainable=False, name="global_step")
+  #self.framework.loss(self.top.inp.out) # last layer before recurrent
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](learning_rate(global_step, self))
