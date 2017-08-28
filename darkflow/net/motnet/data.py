@@ -122,11 +122,10 @@ def shuffle(self):
       feed_batch = dict()
 
       for step in range(batch * batch_size, batch * batch_size + batch_size):
-        start_img = data[shuffle_idx[step]]
-        #start_img = data[0]
+        #start_img = data[shuffle_idx[step]]
+        start_img = data[0]
         start_img = fit_to_seq_length(self.FLAGS.dataset, data, start_img, seq_length)
         idx_of_start = data.index(start_img)
-        #print("start_img is " + start_img[0])
         for seq in range(seq_length):
           train_instance = data[idx_of_start + seq]
           print("train_img is " + train_instance[0])

@@ -53,3 +53,6 @@ darkflow/cython_utils/
 #timelines
 timeline_step_*.json
 motc_utils/mail_settings.py
+
+ckpt*
+summary*
