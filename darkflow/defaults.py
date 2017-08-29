@@ -23,7 +23,7 @@ class argHandler(dict):
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/Annotations/','path to annotation directory')
 
     self.define('backup', './ckpt_overfit_motnet_orig_yolo_seq_one/', 'path to backup folder')
-    self.define('summary', './summary_overfit_motnet__orig_yolo_seq_one/', 'path to TensorBoard summaries directory')
+    self.define('summary', './summary_overfit_motnet_orig_yolo_seq_one/', 'path to TensorBoard summaries directory')
     self.define('threshold', -0.1, 'detection threshold')
     self.define('model', '', 'configuration of choice')
     self.define('trainer', 'adam', 'training algorithm')
