@@ -52,7 +52,8 @@ class weights_loader(loader):
     ],
     'connected': ['biases', 'weights'],
     'local': ['biases', 'kernels'],
-    'recurrent' : ['biases', 'weights']
+    'recurrent' : ['biases', 'weights'],
+    'convolutional_lstm': ['biases', 'weights']
   })
 
   def load(self, path, src_layers):
