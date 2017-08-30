@@ -23,7 +23,7 @@ def build_train_op(self):
 
   '''Method 1: Call minimize either with or without var_list'''
   #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list) # only recurrent layer trainable
-  #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
+  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
 
   '''Method 2: First compute gradients either with or without var_list and then apply'''
   #gradients = optimizer.compute_gradients(self.framework.loss, var_list=var_list)
@@ -31,10 +31,10 @@ def build_train_op(self):
   #self.train_op = optimizer.apply_gradients(gradients)
 
   '''Method 3: As Method 2 but with clipping'''
-  gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
+  #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
   #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
   #gradients = clip_gradients(gradients)
-  self.train_op = optimizer.apply_gradients(zip(gradients, variables))
+  #self.train_op = optimizer.apply_gradients(zip(gradients, variables))
 
 
 def clip_gradients(gradients):
@@ -48,7 +48,7 @@ def learning_rate(global_step, self):
   self.FLAGS.learningRate = tf.train.exponential_decay(
     self.FLAGS.lr, # Base learning rate.
     global_step,
-    100, # Decay step.
+    10000, # Decay step.
     0.9, # Decay rate.
     staircase=True)
   return self.FLAGS.learningRate
