@@ -33,7 +33,7 @@ def build_train_op(self):
   '''Method 3: As Method 2 but with clipping'''
   gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
   #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
-  gradients = clip_gradients(gradients)
+  #gradients = clip_gradients(gradients)
   self.train_op = optimizer.apply_gradients(zip(gradients, variables))
 
 
@@ -48,7 +48,7 @@ def learning_rate(global_step, self):
   self.FLAGS.learningRate = tf.train.exponential_decay(
     self.FLAGS.lr, # Base learning rate.
     global_step,
-    1000, # Decay step.
+    100, # Decay step.
     0.9, # Decay rate.
     staircase=True)
   return self.FLAGS.learningRate

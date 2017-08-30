@@ -10,20 +10,20 @@ class argHandler(dict):
     self.define('binary', './bin/', 'path to .weights directory')
     self.define('config', './cfg/', 'path to .cfg directory')
     
-    #self.define('dataset', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to dataset directory') # resized images
+    self.define('dataset', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to dataset directory') # resized images
     #self.define('dataset', '/storage_local/frolov/MOTC/MOT17/train/', 'path to dataset directory') # original sized images
     #self.define('dataset', '/home/frolov/U/MOTC/MOT17/train/', 'path to dataset directory')
-    self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/', 'path to dataset directory')
+    #self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/', 'path to dataset directory')
     #self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/JPEGImages/', 'path to dataset directory')
 
-    #self.define('annotation', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to annotation directory')
+    self.define('annotation', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/storage_local/frolov/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/home/frolov/U/MOTC/MOT17/train/', 'path to annotation directory')
-    self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/','path to annotation directory')
+    #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/','path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/Annotations/','path to annotation directory')
 
-    self.define('backup', './ckpt_overfit_motnet_orig_yolo_seq_one/', 'path to backup folder')
-    self.define('summary', './summary_overfit_motnet_orig_yolo_seq_one/', 'path to TensorBoard summaries directory')
+    self.define('backup', './ckpt_overfit_motnet_orig_yolo_seq_one_convlstm/', 'path to backup folder')
+    self.define('summary', './summary_overfit_motnet_orig_yolo_seq_one_convlstm/', 'path to TensorBoard summaries directory')
     self.define('threshold', -0.1, 'detection threshold')
     self.define('model', '', 'configuration of choice')
     self.define('trainer', 'adam', 'training algorithm')
