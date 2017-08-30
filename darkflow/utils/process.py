@@ -111,6 +111,10 @@ def cfg_yielder(model, binary):
       w, h, c = w_, h_, n
       l = w * h * c
     # -----------------------------------------------------
+    elif d['type'] == '[convolutional_lstm]':
+      seq_length = 1 # just in case
+      yield ['convolutional_lstm', i, seq_length]
+    # -----------------------------------------------------
     elif d['type'] == '[recurrent]':
       seq_length = 1 # just in case
       yield ['recurrent', i, seq_length]

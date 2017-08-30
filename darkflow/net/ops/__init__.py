@@ -5,6 +5,7 @@ from .simple import *
 
 op_types = {
   'convolutional': convolutional,
+  'convolutional_lstm': convolutional_lstm,
   'recurrent': recurrent,
   'conv-select': conv_select,
   'connected': connected,

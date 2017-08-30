@@ -111,7 +111,8 @@ def shuffle(self):
   size = len(data)
 
   print('Dataset of {} instance(s)'.format(size))
-  if batch_size > size: self.FLAGS.batch = batch_size = size
+  if batch_size > size:
+    self.FLAGS.batch = batch_size = size
   batch_per_epoch = int(size / batch_size)
   seq_length = self.FLAGS.seq_length
 

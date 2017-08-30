@@ -15,16 +15,33 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 def build_train_op(self):
   global_step = tf.Variable(0, trainable=False, name="global_step_new")
-  #self.framework.loss(self.top.inp.out) # last layer before recurrent
+  #self.framework.loss(self.top.inp.out) # t calculate loss on last layer before recurrent
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](learning_rate(global_step, self))
-  #var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # only recurrent layer trainable
+  var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # only recurrent layer trainable
+
+  '''Method 1: Call minimize either with or without var_list'''
   #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list) # only recurrent layer trainable
-  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
+  #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
+
+  '''Method 2: First compute gradients either with or without var_list and then apply'''
+  #gradients = optimizer.compute_gradients(self.framework.loss, var_list=var_list)
   #gradients = optimizer.compute_gradients(self.framework.loss)
-  #gradients = [(tf.clip_by_global_norm(gradients, 5.0), var) for grad, var in gradients]
   #self.train_op = optimizer.apply_gradients(gradients)
+
+  '''Method 3: As Method 2 but with clipping'''
+  gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
+  #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
+  gradients = clip_gradients(gradients)
+  self.train_op = optimizer.apply_gradients(zip(gradients, variables))
+
+
+def clip_gradients(gradients):
+  gradients = [
+    None if gradient is None else tf.clip_by_norm(gradient, 5.0)
+    for gradient in gradients]
+  return gradients
 
 
 def learning_rate(global_step, self):

@@ -51,6 +51,7 @@ darkops = {
   'connected': connected_layer,
   'maxpool': maxpool_layer,
   'convolutional': convolutional_layer,
+  'convolutional_lstm': convolutional_lstm_layer,
   'avgpool': avgpool_layer,
   'softmax': softmax_layer,
   'crop': crop_layer,

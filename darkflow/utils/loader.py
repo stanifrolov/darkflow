@@ -15,7 +15,7 @@ class loader(object):
   VAR_LAYER = ['convolutional', 'connected', 'local',
                'select', 'conv-select',
                'extract', 'conv-extract',
-               'recurrent']
+               'recurrent', 'convolutional_lstm']
 
   def __init__(self, *args):
     self.src_key = list()
