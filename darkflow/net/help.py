@@ -23,7 +23,7 @@ def build_train_op(self):
 
   '''Method 1: Call minimize either with or without var_list'''
   #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list) # only recurrent layer trainable
-  self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
+  #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step)
 
   '''Method 2: First compute gradients either with or without var_list and then apply'''
   #gradients = optimizer.compute_gradients(self.framework.loss, var_list=var_list)
@@ -36,6 +36,15 @@ def build_train_op(self):
   #gradients = clip_gradients(gradients)
   #self.train_op = optimizer.apply_gradients(zip(gradients, variables))
 
+  '''Method 4: Check gradients'''
+  gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
+  # gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
+  #gradients = clip_gradients(gradients)
+  grad_checks = []
+  for i in range(len(gradients)):
+    grad_checks.append(tf.check_numerics(gradients[i], 'gradients not sound, NaN or Inf'))
+  with tf.control_dependencies(grad_checks):
+    self.train_op = optimizer.apply_gradients(zip(gradients, variables))
 
 def clip_gradients(gradients):
   gradients = [
