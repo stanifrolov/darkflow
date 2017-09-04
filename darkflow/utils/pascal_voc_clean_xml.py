@@ -12,6 +12,10 @@ def _pp(l): # pretty printing
     for i in l: print('{}: {}'.format(i,l[i]))
 
 def pascal_voc_clean_xml(ANN, pick, exclusive = False):
+
+    if os.path.isfile("voc_dump.p"):
+        return pickle.load(open('voc_dump.p', 'rb'))
+
     print('Parsing for {} {}'.format(
             pick, 'exclusively' * int(exclusive)))
 

@@ -7,7 +7,7 @@ from numpy.random import permutation as perm
 import random as random
 
 from darkflow.utils.motc_clean_as_list import motc_clean_as_list
-
+from darkflow.utils.pascal_voc_clean_xml import pascal_voc_clean_xml
 
 def parse(self, exclusive=False):
   meta = self.meta
@@ -17,7 +17,8 @@ def parse(self, exclusive=False):
     msg = 'Annotation directory not found {} .'
     exit('Error: {}'.format(msg.format(ann)))
   print('\n{} parsing {}'.format(meta['model'], ann))
-  dumps = motc_clean_as_list(ann, exclusive)
+  #dumps = motc_clean_as_list(ann, exclusive)
+  dumps = pascal_voc_clean_xml(ann, exclusive)
   return dumps
 
 
@@ -123,8 +124,8 @@ def shuffle(self):
       feed_batch = dict()
 
       for step in range(batch * batch_size, batch * batch_size + batch_size):
-        start_img = data[shuffle_idx[step]]
-        #start_img = data[0]
+        #start_img = data[shuffle_idx[step]]
+        start_img = data[0]
         start_img = fit_to_seq_length(self.FLAGS.dataset, data, start_img, seq_length)
         idx_of_start = data.index(start_img)
         for seq in range(seq_length):

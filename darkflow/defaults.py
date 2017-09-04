@@ -10,20 +10,22 @@ class argHandler(dict):
     self.define('binary', './bin/', 'path to .weights directory')
     self.define('config', './cfg/', 'path to .cfg directory')
     
-    self.define('dataset', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to dataset directory') # resized images
+    #self.define('dataset', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to dataset directory') # resized images
     #self.define('dataset', '/storage_local/frolov/MOTC/MOT17/train/', 'path to dataset directory') # original sized images
+    self.define('dataset', '/storage_local/frolov/VOCdevkit/VOC2007/JPEGImages/', 'path to dataset directory') # original sized images
     #self.define('dataset', '/home/frolov/U/MOTC/MOT17/train/', 'path to dataset directory')
     #self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/', 'path to dataset directory')
     #self.define('dataset', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/JPEGImages/', 'path to dataset directory')
 
-    self.define('annotation', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to annotation directory')
+    #self.define('annotation', '/home_local_SSD/frolov/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/storage_local/frolov/MOTC/MOT17/train/', 'path to annotation directory')
+    self.define('annotation', '/storage_local/frolov/VOCdevkit/VOC2007/Annotations/', 'path to annotation directory')
     #self.define('annotation', '/home/frolov/U/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/','path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/Annotations/','path to annotation directory')
 
-    self.define('backup', './ckpt_train_motnet_convlstm/', 'path to backup folder')
-    self.define('summary', './summary_train_motnet_convlstm/', 'path to TensorBoard summaries directory')
+    self.define('backup', './ckpt_overfit_motnet_on_voc_convlstm/', 'path to backup folder')
+    self.define('summary', './summary_overfit_motnet_on_voc_convlstm/', 'path to TensorBoard summaries directory')
     self.define('threshold', -0.1, 'detection threshold')
     self.define('model', '', 'configuration of choice')
     self.define('trainer', 'adam', 'training algorithm')
@@ -34,7 +36,7 @@ class argHandler(dict):
     self.define('savepb', False, 'save net and weight to a .pb file')
     self.define('gpu', 0.0, 'how much gpu (from 0.0 to 1.0)')
     self.define('gpuName', '/gpu:0', 'GPU device name')
-    self.define('lr', 1e-5, 'learning rate')
+    self.define('lr', 1e-2, 'learning rate')
     self.define('keep', 0, 'Number of most recent training results to save')
     self.define('batch', 2, 'batch size')
     self.define('epoch', 200, 'number of epoch')
