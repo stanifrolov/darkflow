@@ -15,6 +15,7 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 def build_train_op(self):
   global_step = tf.Variable(self.FLAGS.load, trainable=False, name="global_step")
+  #global_step = tf.Variable(0, trainable=False, name="global_step") # Use this if loading from one of our own ckpts
   #self.framework.loss(self.top.inp.out) # t calculate loss on last layer before recurrent
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
