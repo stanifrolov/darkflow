@@ -14,7 +14,7 @@ old_graph_msg = 'Resolving old graph def {} (no guarantee)'
 
 
 def build_train_op(self):
-  global_step = tf.Variable(0, trainable=False, name="global_step_new")
+  global_step = tf.Variable(self.FLAGS.load, trainable=False, name="global_step")
   #self.framework.loss(self.top.inp.out) # t calculate loss on last layer before recurrent
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
@@ -28,23 +28,23 @@ def build_train_op(self):
   '''Method 2: First compute gradients either with or without var_list and then apply'''
   #gradients = optimizer.compute_gradients(self.framework.loss, var_list=var_list)
   #gradients = optimizer.compute_gradients(self.framework.loss)
-  #self.train_op = optimizer.apply_gradients(gradients)
+  #self.train_op = optimizer.apply_gradients(gradients, global_step=global_step)
 
   '''Method 3: As Method 2 but with clipping'''
   #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
   #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
   #gradients = clip_gradients(gradients)
-  #self.train_op = optimizer.apply_gradients(zip(gradients, variables))
+  #self.train_op = optimizer.apply_gradients(zip(gradients, variables), global_step=global_step)
 
   '''Method 4: Check gradients'''
   gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss))
-  # gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
+  #gradients, variables = zip(*optimizer.compute_gradients(self.framework.loss, var_list=var_list))
   #gradients = clip_gradients(gradients)
   grad_checks = []
   for i in range(len(gradients)):
     grad_checks.append(tf.check_numerics(gradients[i], 'gradients not sound, NaN or Inf'))
   with tf.control_dependencies(grad_checks):
-    self.train_op = optimizer.apply_gradients(zip(gradients, variables))
+    self.train_op = optimizer.apply_gradients(zip(gradients, variables), global_step=global_step)
 
 def clip_gradients(gradients):
   gradients = [
