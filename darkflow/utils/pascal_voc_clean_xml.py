@@ -48,8 +48,8 @@ def pascal_voc_clean_xml(ANN, pick, exclusive = False):
 
         for obj in root.iter('object'):
                 current = list()
-                #name = obj.find('name').text
-                name = 'object'  # TODO: VOC experiment: reset
+                name = obj.find('name').text
+                #name = 'object'  #VOC experiment: reset
                 if name not in pick:
                         continue
 

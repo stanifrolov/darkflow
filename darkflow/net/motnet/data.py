@@ -17,8 +17,8 @@ def parse(self, exclusive=False):
     msg = 'Annotation directory not found {} .'
     exit('Error: {}'.format(msg.format(ann)))
   print('\n{} parsing {}'.format(meta['model'], ann))
-  #dumps = motc_clean_as_list(ann, exclusive)
-  dumps = pascal_voc_clean_xml(ann, meta['labels'], exclusive) # TODO: VOC experiment: reset
+  dumps = motc_clean_as_list(ann, exclusive)
+  #dumps = pascal_voc_clean_xml(ann, meta['labels'], exclusive) #VOC experiment: use voc dump
   return dumps
 
 
@@ -125,8 +125,9 @@ def shuffle(self):
 
       for step in range(batch * batch_size, batch * batch_size + batch_size):
         #start_img = data[shuffle_idx[step]]
-        start_img = data[7] # TODO: VOC experiment: reset
-        #start_img = fit_to_seq_length(self.FLAGS.dataset, data, start_img, seq_length) # TODO: VOC experiment: reset
+        #start_img = data[7] # VOC experiment: cat img
+        start_img = data[0]
+        start_img = fit_to_seq_length(self.FLAGS.dataset, data, start_img, seq_length) #VOC experiment: comment this line
         idx_of_start = data.index(start_img)
         for seq in range(seq_length):
           train_instance = data[idx_of_start + seq]

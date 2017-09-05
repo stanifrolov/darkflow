@@ -10,13 +10,17 @@ class recurrent(BaseOp):
     input_shape = tf.shape(_X)[0]
     num_units = _X.shape.dims[1].value * _X.shape.dims[2].value * _X.shape.dims[3].value
     _X_list = tf.reshape(_X, [input_shape, num_units])
-    _X_list = tf.split(_X_list, self.lay.seq_length, 0)
+    _X_list = tf.split(_X_list, self.lay.seq_length, 0) # Try tf.unstack
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
+      #cell = tf.contrib.rnn.LayerNormBasicLSTMCell(num_units)
       #cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
-      cell = tf.contrib.rnn.LayerNormBasicLSTMCell(num_units)
-      state = (tf.zeros([batch_size, num_units]),) * 2
+      #state = (tf.zeros([batch_size, num_units]),) * 2
+
+      cell = tf.contrib.rnn.GRUCell(num_units)
+      state = tf.zeros([batch_size, num_units])
+
       out = []
 
       for step in range(self.lay.seq_length):
@@ -34,6 +38,9 @@ class recurrent(BaseOp):
     msg = 'recurrent seq_length {}'.format(*args)
     return msg
 
+def identity(x):
+  return x
+
 class convolutional_lstm(BaseOp):
   def forward(self):
     _X = self.inp.out
@@ -42,7 +49,7 @@ class convolutional_lstm(BaseOp):
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
-      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30)
+      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30, activation=identity)
       hidden = cell.zero_state(batch_size, tf.float32)
       out = []
 
