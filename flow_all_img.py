@@ -1,4 +1,5 @@
 from darkflow.cli import cliHandler
+from motc_utils import img2video
 
 all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/train/MOT17-04-FRCNN/img1',
@@ -16,7 +17,8 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-14-FRCNN/img1',
             '/home/frolov/U/boy',
             '/home/frolov/U/tud']
-        
+
+
 for path in all_dirs:
     print("Now flowing " + path)
     try:
@@ -25,3 +27,4 @@ for path in all_dirs:
         cliHandler(command)
     except:
         print("Error or Done")
+        img2video.img_to_video(path)
