@@ -19,6 +19,9 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
         
 for path in all_dirs:
     print("Now flowing " + path)
-    command = './flow --imgdir ' + path + ' --model cfg/full_motnet.cfg --load -1 --gpu 0.9 --batch 12 --seq_length 1'
-    command = command.split()
-    cliHandler(command)
+    try:
+        command = './flow --imgdir ' + path + ' --model cfg/full_motnet.cfg --load -1 --gpu 0.9 --batch 1 --seq_length 12'
+        command = command.split()
+        cliHandler(command)
+    except:
+        print("Error or Done")
