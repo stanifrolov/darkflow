@@ -50,10 +50,7 @@ class convolutional_lstm(BaseOp):
 
     with tf.variable_scope(self.scope) as scope:
       cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30, activation=identity)
-      if not batch_size == 1: #get batch_size somehow
-        hidden = tf.Variable(tf.zeros(shape=[1, 13, 13, 30 * 2]), trainable=False, name="hidden")
-      else:
-        hidden = cell.zero_state(batch_size, tf.float32)
+      hidden = cell.zero_state(batch_size, tf.float32)
       out = []
 
       for step in range(self.lay.seq_length):
