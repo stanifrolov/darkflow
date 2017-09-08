@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/train/MOT17-04-FRCNN/img1',
@@ -29,7 +30,7 @@ def img_to_video(path):
     print("Creating video")
     os.chdir(path + "/out")
     command = "ffmpeg -y -framerate 25 -pattern_type glob -i '*.jpg' /home/frolov/U/" + get_dataset_name_from_path(path) + ".mp4"
-    os.subprocess.Popen(command, shell=True)
+    subprocess.Popen(command, shell=True)
 
 
 for path in all_dirs:
