@@ -31,7 +31,3 @@ def img_to_video(path):
     os.chdir(path + "/out")
     command = "ffmpeg -y -framerate 25 -pattern_type glob -i '*.jpg' /home/frolov/U/" + get_dataset_name_from_path(path) + ".mp4"
     subprocess.Popen(command, shell=True)
-
-
-for path in all_dirs:
-  img_to_video(path)
