@@ -131,8 +131,7 @@ def predict(self):
 
   batch = min(self.FLAGS.batch, len(all_inps))
   if batch == 1:
-    #batch = self.FLAGS.seq_length
-    batch = len(all_inps)
+    batch = self.FLAGS.seq_length
 
   # predict in batches
   n_batch = int(math.ceil(len(all_inps) / batch))
