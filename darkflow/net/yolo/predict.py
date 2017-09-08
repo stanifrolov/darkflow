@@ -63,7 +63,6 @@ def preprocess(self, im, allobj=None):
   using scale, translation, flipping and recolor. The accompanied
   parsed annotation (allobj) will also be modified accordingly.
   """
-  # TODO: implement img augmentation with tensorflow (see tf-script/train.py)
   if type(im) is not np.ndarray:
     im = cv2.imread(im)
 
