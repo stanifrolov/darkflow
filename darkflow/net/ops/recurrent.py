@@ -49,7 +49,7 @@ class convolutional_lstm(BaseOp):
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
-      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30)
+      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30, activation=identity)
 
       hidden = cell.zero_state(batch_size, tf.float32)
 
@@ -62,8 +62,7 @@ class convolutional_lstm(BaseOp):
         out.append(outputs)
 
     out = tf.stack(out, 0)
-    out = tf.reshape(out, [input_shape, _X.shape.dims[1].value, _X.shape.dims[2].value, _X.shape.dims[3].value])
-    self.out = tf.contrib.layers.bias_add(out)
+    self.out = tf.reshape(out, [input_shape, _X.shape.dims[1].value, _X.shape.dims[2].value, _X.shape.dims[3].value])
 
   def speak(self):
     l = self.lay
