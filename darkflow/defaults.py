@@ -41,7 +41,7 @@ class argHandler(dict):
     self.define('batch', 2, 'batch size')
     self.define('epoch', 200, 'number of epoch')
     self.define('seq_length', 6, 'seq_length of recurrent layer')
-    self.define('save', 10000, 'save checkpoint every ? training examples')
+    self.define('save', 20000, 'save checkpoint every ? training examples')
     self.define('demo', '', 'demo on webcam')
     self.define('queue', 1, 'process demo in batch')
     self.define('json', False, 'Outputs bounding box information in json format.')
