@@ -49,7 +49,7 @@ class convolutional_lstm(BaseOp):
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
-      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30, activation=identity)
+      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30)
 
       hidden = cell.zero_state(batch_size, tf.float32)
       hidden = tf.contrib.layers.bias_add(hidden)
