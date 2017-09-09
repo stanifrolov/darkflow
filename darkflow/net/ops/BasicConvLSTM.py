@@ -136,7 +136,6 @@ def _conv_linear(args, filter_size, num_features, bias, bias_start=0.0, scope=No
       res = tf.nn.conv2d(args[0], matrix, strides=[1, 1, 1, 1], padding='SAME')
     else:
       res = tf.nn.conv2d(tf.concat(axis=3, values=args), matrix, strides=[1, 1, 1, 1], padding='SAME')
-    res = tf.contrib.layers.bias_add(res)
     if not bias:
       return res
     bias_term = tf.get_variable(

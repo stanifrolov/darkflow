@@ -62,7 +62,8 @@ class convolutional_lstm(BaseOp):
         out.append(outputs)
 
     out = tf.stack(out, 0)
-    self.out = tf.reshape(out, [input_shape, _X.shape.dims[1].value, _X.shape.dims[2].value, _X.shape.dims[3].value])
+    out = tf.reshape(out, [input_shape, _X.shape.dims[1].value, _X.shape.dims[2].value, _X.shape.dims[3].value])
+    self.out = tf.contrib.layers.bias_add(out)
 
   def speak(self):
     l = self.lay
