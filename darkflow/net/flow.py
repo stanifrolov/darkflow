@@ -84,7 +84,7 @@ def train(self):
 
     ckpt = (i + 1) % (self.FLAGS.save // self.FLAGS.batch)
     args = [step_now, profile]
-    if not ckpt:
+    if ckpt:
       _save_ckpt(self, *args)
       send_email(step_now, lr, loss, loss_mva, stop - start)
 
