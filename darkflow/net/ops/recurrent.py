@@ -15,11 +15,11 @@ class recurrent(BaseOp):
 
     with tf.variable_scope(self.scope) as scope:
       #cell = tf.contrib.rnn.LayerNormBasicLSTMCell(num_units)
-      #cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
-      #state = (tf.zeros([batch_size, num_units]),) * 2
+      cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
+      state = (tf.zeros([batch_size, num_units]),) * 2
 
-      cell = tf.contrib.rnn.GRUCell(num_units)
-      state = tf.zeros([batch_size, num_units])
+      #cell = tf.contrib.rnn.GRUCell(num_units)
+      #state = tf.zeros([batch_size, num_units])
 
       out = []
 
@@ -49,7 +49,7 @@ class convolutional_lstm(BaseOp):
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
-      cell = BasicConvLSTMCell(shape=[13, 13], filter_size=[3, 3], num_features=30, activation=identity)
+      cell = BasicConvLSTMCell(shape=[_X.shape.dims[1].value, _X.shape.dims[2].value], filter_size=[3, 3], num_features=_X.shape.dims[3].value)
 
       hidden = cell.zero_state(batch_size, tf.float32)
 

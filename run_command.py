@@ -21,7 +21,7 @@ Working configs
 """
 Training Commands
 """
-#command = './flow --model cfg/full_motnet.cfg --load bin/yolo.weights --train --gpu 0.9 --batch 1 --seq_length 1'
+#command = './flow --model cfg/full_motnet.cfg --load bin/yolo.weights --train --gpu 0.9 --batch 2 --seq_length 2'
 #command = './flow --model cfg/tiny_motnet.cfg --load bin/tiny-yolo-voc.weights --train --gpu 0.9 --seq_length 3'
 
 """
