@@ -1,5 +1,6 @@
 from darkflow.cli import cliHandler
 from motc_utils import img2video
+import os
 
 all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/train/MOT17-04-FRCNN/img1',
@@ -17,6 +18,14 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-14-FRCNN/img1',
             '/home/frolov/U/boy',
             '/home/frolov/U/tud']
+
+
+otb_dirs = os.walk('/home/frolov/U/otb/')
+otb_dirs = [dir + "/img" for dir in otb_dirs]
+vot2015_dirs = os.walk('/home/frolov/U/vot2015/')
+
+all_dirs.append(otb_dirs)
+all_dirs.append(vot2015_dirs)
 
 
 for path in all_dirs:
