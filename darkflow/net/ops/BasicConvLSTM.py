@@ -34,12 +34,12 @@ class ConvRNNCell(object):
 
     shape = self.shape
     num_features = self.num_features
-    train = True
+    train = False
     if train:
       zeros = tf.zeros([batch_size, shape[0], shape[1], num_features * 2])
     else:
       batch_length = 1
-      zeros = tf.Variable(tf.zeros([batch_length, shape[0], shape[1], num_features * 2]), trainable=False)
+      zeros = tf.get_variable("hidden", initializer=tf.zeros([batch_length, shape[0], shape[1], num_features * 2]), trainable=False)
     return zeros
 
 

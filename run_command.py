@@ -3,7 +3,7 @@ from darkflow.cli import cliHandler
 """
 Test data
 """
-#command = './flow --imgdir /home/frolov/U/MOTC/MOT17/train/MOT17-05-FRCNN/img1 --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 30'
+command = './flow --imgdir /home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1 --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 6 --threshold 0.6'
 #command = './flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1--model cfg/full_motnet.cfg --batch 1 --seq_length 12'
 
 #command = './flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1 --model cfg/yolo.cfg --load bin/yolo.weights'
@@ -27,7 +27,7 @@ Training Commands
 """
 Training on Machine
 """
-command = './flow --model cfg/full_motnet.cfg --train --load bin/yolo.weights --gpu 0.9 --batch 4 --seq_length 6'
+#command = './flow --model cfg/full_motnet.cfg --train --load -1 --gpu 0.9 --batch 4 --seq_length 6'
 
 """
 Run the command
