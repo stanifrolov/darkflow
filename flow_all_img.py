@@ -19,13 +19,13 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/boy',
             '/home/frolov/U/tud']
 
+all_dirs = []
 
-otb_dirs = os.walk('/home/frolov/U/otb/')
-otb_dirs = [dir + "/img" for dir in otb_dirs]
-vot2015_dirs = os.walk('/home/frolov/U/vot2015/')
+otb_dirs = ['/home/frolov/U/otb/' + dir + '/img' for dir in os.listdir('/home/frolov/U/otb/') if os.path.isdir(os.path.join('/home/frolov/U/otb/', dir))]
+vot2015_dirs = ['/home/frolov/U/vot2015/ + 'dir for dir in os.listdir('/home/frolov/U/vot2015/') if os.path.isdir(os.path.join('/home/frolov/U/vot2015/', dir))] 
 
-all_dirs.append(otb_dirs)
-all_dirs.append(vot2015_dirs)
+all_dirs.extend(otb_dirs)
+all_dirs.extend(vot2015_dirs)
 
 
 for path in all_dirs:
