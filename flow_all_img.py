@@ -16,7 +16,6 @@ all_dirs = ['/home/frolov/U/MOTC/MOT17/train/MOT17-02-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-08-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-12-FRCNN/img1',
             '/home/frolov/U/MOTC/MOT17/test/MOT17-14-FRCNN/img1',
-            '/home/frolov/U/boy',
             '/home/frolov/U/tud']
 
 otb_path = '/home/frolov/U/otb/'
@@ -37,3 +36,10 @@ for path in all_dirs:
     except:
         print("Error or Done")
         img2video.img_to_video(path)
+
+response = input("All images flowed. Do you want to create videos? (y/n): ")
+
+if response is "y":
+  for path in all_dirs:
+      print("Creating video for " + path)
+      img2video.img_to_video(path)
