@@ -45,7 +45,10 @@ ckpt/*
 .cache/
 
 #data
-MOTC/
+MOTC/2DMOT2015/
+MOTC/MOT17/
+MOTC/MOT17Labels/
+MOTC/motchallenge-devkit/.hg/
 VOCdevkit/
 darkflow/cython_utils/
 
