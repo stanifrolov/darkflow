@@ -1,7 +1,7 @@
 #include <matrix.h>
 #include "mex.h"
 #include <cmath>
-#include <omp.h>
+//#include <omp.h>
 #define min(a,b) ((a) < (b) ? (a) : (b))
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
