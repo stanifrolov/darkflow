@@ -4,7 +4,7 @@ from darkflow.cli import cliHandler
 Test data
 """
 #command = './flow --imgdir /home/frolov/U/MOTC/MOT17/train/MOT17-05-FRCNN/img1 --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 30'
-#command = './flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1--model cfg/full_motnet.cfg --batch 1 --seq_length 12'
+#command = './flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1 --model cfg/full_motnet.cfg --batch 1 --seq_length 12'
 
 #command = './flow --imgdir /Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/test/MOT17-14-FRCNN/img1 --model cfg/yolo.cfg --load bin/yolo.weights'
 
