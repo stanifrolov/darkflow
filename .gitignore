@@ -46,11 +46,17 @@ ckpt/*
 
 #data
 MOTC/2DMOT2015/
+MOTC/MOT16/
 MOTC/MOT17/
 MOTC/MOT17Labels/
+MOTC/MOT17Det/
+MOTC/MOT17DetLabels/
 MOTC/motchallenge-devkit/.hg/
 VOCdevkit/
 darkflow/cython_utils/
+
+MOTC/motchallenge-devkit/motchallenge/res/MOT17Det/DPM/data/clean/
+MOTC/motchallenge-devkit/motchallenge/res/MOT17Det/DPM/data/eval2D.txt
 
 #timelines
 timeline_step_*.json
