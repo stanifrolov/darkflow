@@ -56,6 +56,7 @@ VOCdevkit/
 darkflow/cython_utils/
 
 MOTC/motchallenge-devkit/motchallenge/res/MOT17Det/DPM/data/clean/
+MOTC/motchallenge-devkit/motchallenge/res/MOT17/data/
 MOTC/motchallenge-devkit/motchallenge/res/MOT17Det/DPM/data/eval2D.txt
 MOTC/motchallenge-devkit/motchallenge/res/MOT17Det/DPM/data/eval_dets.mat
 MOTC/motchallenge-devkit/motchallenge/res/MOT17Det/DPM/data/rcpr-train.png
