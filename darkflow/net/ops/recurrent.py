@@ -14,8 +14,8 @@ class recurrent(BaseOp):
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
-      #cell = tf.contrib.rnn.LayerNormBasicLSTMCell(num_units)
-      cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
+      cell = tf.contrib.rnn.LayerNormBasicLSTMCell(num_units)
+      #cell = tf.contrib.rnn.LSTMCell(num_units, state_is_tuple=True)
       state = (tf.zeros([batch_size, num_units]),) * 2
 
       #cell = tf.contrib.rnn.GRUCell(num_units)
