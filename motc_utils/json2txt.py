@@ -4,7 +4,7 @@ import json
 def getSeqNameFromPath(path):
   return path.split("/")[7]
 
-with open("img_paths.txt", encoding="utf-8") as file:
+with open("dev_paths.txt", encoding="utf-8") as file:
   my_list = file.readlines()
   all_dirs = [x.strip() for x in my_list]
 
