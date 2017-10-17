@@ -23,7 +23,6 @@ class argHandler(dict):
     #self.define('annotation', '/home/frolov/U/MOTC/MOT17/train/', 'path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/','path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/Annotations/','path to annotation directory')
-
     self.define('backup', './ckpt_1_convlstm_after/', 'path to backup folder')
     self.define('summary', './summary_1_convlstm_after/', 'path to TensorBoard summaries directory')
     self.define('threshold', -0.1, 'detection threshold')
@@ -39,7 +38,7 @@ class argHandler(dict):
     self.define('lr', 1e-5, 'learning rate')
     self.define('keep', 0, 'Number of most recent training results to save')
     self.define('batch', 2, 'batch size')
-    self.define('epoch', 50, 'number of epoch')
+    self.define('epoch', 20, 'number of epoch')
     self.define('seq_length', 6, 'seq_length of recurrent layer')
     self.define('save', 5000, 'save checkpoint every ? training examples')
     self.define('demo', '', 'demo on webcam')
