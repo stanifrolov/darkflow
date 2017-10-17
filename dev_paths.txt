@@ -1,0 +1,7 @@
+/home/frolov/U/MOTC/MOT17/dev/MOT17-02-FRCNN/img1
+/home/frolov/U/MOTC/MOT17/dev/MOT17-04-FRCNN/img1
+/home/frolov/U/MOTC/MOT17/dev/MOT17-05-FRCNN/img1
+/home/frolov/U/MOTC/MOT17/dev/MOT17-09-FRCNN/img1
+/home/frolov/U/MOTC/MOT17/dev/MOT17-10-FRCNN/img1
+/home/frolov/U/MOTC/MOT17/dev/MOT17-11-FRCNN/img1
+/home/frolov/U/MOTC/MOT17/dev/MOT17-13-FRCNN/img1
