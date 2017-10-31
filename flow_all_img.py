@@ -8,7 +8,7 @@ with open("dev_paths.txt", encoding="utf-8") as file:
   for path in all_dirs:
     print("Now flowing " + path)
     try:
-      command = './flow --imgdir ' + path + ' --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 6 --json'
+      command = './flow --imgdir ' + path + ' --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 1 --json'
       command = command.split()
       cliHandler(command)
     except:
