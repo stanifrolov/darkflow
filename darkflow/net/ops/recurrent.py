@@ -49,7 +49,7 @@ class convolutional_lstm(BaseOp):
     batch_size = tf.shape(_X_list[0])[0]
 
     with tf.variable_scope(self.scope) as scope:
-      cell = BasicConvLSTMCell(shape=[_X.shape.dims[1].value, _X.shape.dims[2].value], filter_size=[5, 5], num_features=_X.shape.dims[3].value) # TODO: kernel size
+      cell = BasicConvLSTMCell(shape=[_X.shape.dims[1].value, _X.shape.dims[2].value], filter_size=[3, 3], num_features=_X.shape.dims[3].value) # TODO: kernel size
 
       hidden = cell.zero_state(batch_size, tf.float32)
 
