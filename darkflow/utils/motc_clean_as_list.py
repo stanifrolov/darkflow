@@ -16,8 +16,8 @@ def _pp(l):  # pretty printing
 def motc_clean_as_list(ANN, exclusive=False):
   start_directory = os.getcwd()
 
-  if os.path.isfile("motc_dump_resized.p"):
-    return pickle.load(open('motc_dump_resized.p', 'rb'))
+  if os.path.isfile("motc_dump.p"):
+    return pickle.load(open('motc_dump.p', 'rb'))
 
   os.chdir(ANN)
   annotations = glob.glob('*FRCNN')
@@ -103,7 +103,7 @@ def motc_clean_as_list(ANN, exclusive=False):
   os.chdir(start_directory)
 
   dumplist.sort()
-  pickle.dump(dumplist, open('motc_dump_resized.p', 'wb'))
+  pickle.dump(dumplist, open('motc_dump.p', 'wb'))
   return dumplist
 
 

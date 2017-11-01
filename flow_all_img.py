@@ -1,14 +1,14 @@
 from darkflow.cli import cliHandler
 from motc_utils import img2video
 
-with open("img_paths.txt", encoding="utf-8") as file:
+with open("dev_paths.txt", encoding="utf-8") as file:
   my_list = file.readlines()
   all_dirs = [x.strip() for x in my_list]
 
   for path in all_dirs:
     print("Now flowing " + path)
     try:
-      command = './flow --imgdir ' + path + ' --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 6 --threshold 0.6'
+      command = './flow --imgdir ' + path + ' --model cfg/full_motnet.cfg --load -1 --batch 1 --seq_length 1 --json'
       command = command.split()
       cliHandler(command)
     except:

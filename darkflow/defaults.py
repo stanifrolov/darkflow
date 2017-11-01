@@ -39,7 +39,7 @@ class argHandler(dict):
     self.define('lr', 1e-5, 'learning rate')
     self.define('keep', 0, 'Number of most recent training results to save')
     self.define('batch', 2, 'batch size')
-    self.define('epoch', 20, 'number of epoch')
+    self.define('epoch', 100, 'number of epoch')
     self.define('seq_length', 6, 'seq_length of recurrent layer')
     self.define('save', 5000, 'save checkpoint every ? training examples')
     self.define('demo', '', 'demo on webcam')
