@@ -24,8 +24,8 @@ class argHandler(dict):
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/MOTC/MOT17/train/','path to annotation directory')
     #self.define('annotation', '/Users/sfrolov/master-thesis/code/darkflow/VOCdevkit/VOC2007/Annotations/','path to annotation directory')
 
-    self.define('backup', './ckpt_1_convlstm_after_gt_leaky_k3_freezed/', 'path to backup folder')
-    self.define('summary', './summary_1_convlstm_after_gt_leaky_k3_freezed/', 'path to TensorBoard summaries directory')
+    self.define('backup', './ckpt_1_convlstm_before_gt_k3_freezed/', 'path to backup folder')
+    self.define('summary', './summary_1_convlstm_before_gt_k3_freezed/', 'path to TensorBoard summaries directory')
     self.define('threshold', -0.1, 'detection threshold')
     self.define('model', '', 'configuration of choice')
     self.define('trainer', 'adam', 'training algorithm')
