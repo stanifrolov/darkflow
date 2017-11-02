@@ -20,7 +20,7 @@ def build_train_op(self):
   self.framework.loss(self.out)
   self.say('Building {} train op'.format(self.meta['model']))
   optimizer = self._TRAINER[self.FLAGS.trainer](learning_rate(global_step, self))
-  var_list = [var for var in tf.trainable_variables() if "recurrent" in var.name] # only recurrent layer trainable
+  var_list = [var for var in tf.trainable_variables() if "54" in var.name or "55" in var.name] # only recurrent layer trainable
 
   '''Method 1: Call minimize either with or without var_list'''
   #self.train_op = optimizer.minimize(self.framework.loss, global_step=global_step, var_list=var_list) # only recurrent layer trainable
