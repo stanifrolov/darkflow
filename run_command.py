@@ -27,7 +27,7 @@ Training Commands
 """
 Training on Machine
 """
-command = './flow --model cfg/full_motnet.cfg --train --load bin/yolo.weights --gpu 0.9 --batch 16 --seq_length 1'
+command = './flow --model cfg/full_motnet.cfg --train --load -1 --gpu 0.9 --batch 16 --seq_length 1'
 
 """
 Run the command
