@@ -58,7 +58,7 @@ def learning_rate(global_step, self):
   self.FLAGS.learningRate = tf.train.exponential_decay(
     self.FLAGS.lr, # Base learning rate.
     global_step,
-    1000, # Decay step.
+    7500, # Decay step.
     0.9, # Decay rate.
     staircase=True)
   return self.FLAGS.learningRate
